@@ -1,0 +1,1895 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Project for RGIIS</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: sticky compact top bar, one centered 960px column; modes share one card-centered stage. */
+:root {
+  --bg: #F6F6F9;
+  --surface: #FFFFFF;
+  --surface-2: #F0F0F5;
+  --border: #E3E3EB;
+  --border-strong: #CFCFDB;
+  --text: #1B1B23;
+  --muted: #5E5E6E;
+  --faint: #8A8A99;
+  --accent: #4F46E5;
+  --accent-hover: #4338CA;
+  --accent-ink: #4338CA;
+  --accent-soft: #EEEDFC;
+  --on-accent: #FFFFFF;
+  --ok: #157A3A;
+  --ok-soft: #E7F5EC;
+  --ok-line: #9FD5B1;
+  --bad: #B42318;
+  --bad-soft: #FDECEA;
+  --bad-line: #F2B2AA;
+  --warn: #9A5B00;
+  --warn-soft: #FDF3E1;
+  --shadow: 0 1px 2px rgba(23, 23, 40, .04), 0 4px 16px rgba(23, 23, 40, .05);
+  --shadow-lg: 0 2px 4px rgba(23, 23, 40, .05), 0 16px 40px rgba(23, 23, 40, .08);
+  --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r-sm: 8px;
+  --r: 12px;
+  --r-lg: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111116; --surface: #18181F; --surface-2: #202029; --border: #2A2A35; --border-strong: #3A3A48;
+    --text: #ECECF2; --muted: #A3A3B3; --faint: #7C7C8C;
+    --accent: #6C63F6; --accent-hover: #7D75FA; --accent-ink: #A9A4FF; --accent-soft: #24223F; --on-accent: #FFFFFF;
+    --ok: #5BD38A; --ok-soft: #14291D; --ok-line: #2C6B45; --bad: #FF8A80; --bad-soft: #321A1A; --bad-line: #7A3530;
+    --warn: #F2B65A; --warn-soft: #2E2414;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+    --shadow-lg: 0 2px 4px rgba(0,0,0,.3), 0 16px 40px rgba(0,0,0,.4);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111116; --surface: #18181F; --surface-2: #202029; --border: #2A2A35; --border-strong: #3A3A48;
+  --text: #ECECF2; --muted: #A3A3B3; --faint: #7C7C8C;
+  --accent: #6C63F6; --accent-hover: #7D75FA; --accent-ink: #A9A4FF; --accent-soft: #24223F; --on-accent: #FFFFFF;
+  --ok: #5BD38A; --ok-soft: #14291D; --ok-line: #2C6B45; --bad: #FF8A80; --bad-soft: #321A1A; --bad-line: #7A3530;
+  --warn: #F2B65A; --warn-soft: #2E2414;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  --shadow-lg: 0 2px 4px rgba(0,0,0,.3), 0 16px 40px rgba(0,0,0,.4);
+  color-scheme: dark;
+}
+
+/* Color themes chosen by the viewer; they override the system light/dark tokens. */
+:root[data-palette="white"], :root[data-palette="burgundy"], :root[data-palette="sakura"], :root[data-palette="ocean"], :root[data-palette="forest"], :root[data-palette="sand"] { --ok: #157A3A; --ok-soft: #E7F5EC; --ok-line: #9FD5B1; --bad: #B42318; --bad-soft: #FDECEA; --bad-line: #F2B2AA; --warn: #9A5B00; --warn-soft: #FDF3E1; --on-accent: #FFFFFF; --shadow: 0 1px 2px rgba(23,23,40,.04), 0 4px 16px rgba(23,23,40,.05); --shadow-lg: 0 2px 4px rgba(23,23,40,.05), 0 16px 40px rgba(23,23,40,.08); color-scheme: light; }
+:root[data-palette="white"] { --bg: #FFFFFF; --surface: #FFFFFF; --surface-2: #F4F4F5; --border: #E4E4E7; --border-strong: #D4D4D8; --text: #18181B; --muted: #52525B; --faint: #85858F; --accent: #18181B; --accent-hover: #000000; --accent-ink: #18181B; --accent-soft: #F1F1F3; }
+:root[data-palette="burgundy"] { --bg: #F8F3F3; --surface: #FFFFFF; --surface-2: #F3EAEA; --border: #EADBDC; --border-strong: #D9C2C3; --text: #2A1517; --muted: #6D5254; --faint: #957D7F; --accent: #7A1E2C; --accent-hover: #63141F; --accent-ink: #7A1E2C; --accent-soft: #F5E4E6; }
+:root[data-palette="sakura"] { --bg: #FDF6F8; --surface: #FFFFFF; --surface-2: #FBEBF0; --border: #F3DCE4; --border-strong: #E8C3D0; --text: #2B1A20; --muted: #6E5560; --faint: #9A8490; --accent: #C93A6E; --accent-hover: #B02E5D; --accent-ink: #B02E5D; --accent-soft: #FCE4EC; }
+:root[data-palette="ocean"] { --bg: #F2F6FA; --surface: #FFFFFF; --surface-2: #E8EFF6; --border: #DAE4EE; --border-strong: #C3D2E2; --text: #0F1E2E; --muted: #4F6275; --faint: #7F90A3; --accent: #0B6BCB; --accent-hover: #0858A8; --accent-ink: #0A5CAD; --accent-soft: #E1EEFB; }
+:root[data-palette="forest"] { --bg: #F3F6F2; --surface: #FFFFFF; --surface-2: #E9EFE7; --border: #DCE4D9; --border-strong: #C6D2C2; --text: #17221A; --muted: #55635A; --faint: #838F85; --accent: #2F6B45; --accent-hover: #24563A; --accent-ink: #2A6140; --accent-soft: #E3EFE6; }
+:root[data-palette="sand"] { --bg: #F7F4EE; --surface: #FFFDF9; --surface-2: #EFE9DE; --border: #E5DDCF; --border-strong: #D3C8B6; --text: #26211A; --muted: #655C4F; --faint: #928878; --accent: #9A6A2F; --accent-hover: #82581F; --accent-ink: #80561F; --accent-soft: #F3E8D6; }
+:root[data-palette="midnight"] { --bg: #0E0F14; --surface: #171922; --surface-2: #1F2230; --border: #2A2E3D; --border-strong: #3A3F52; --text: #E9EAF2; --muted: #A2A6B8; --faint: #7A7E92; --accent: #8A90FF; --accent-hover: #9CA1FF; --accent-ink: #AEB2FF; --accent-soft: #232742; --on-accent: #0B0C12; --ok: #5BD38A; --ok-soft: #14291D; --ok-line: #2C6B45; --bad: #FF8A80; --bad-soft: #321A1A; --bad-line: #7A3530; --warn: #F2B65A; --warn-soft: #2E2414; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25); --shadow-lg: 0 2px 4px rgba(0,0,0,.3), 0 16px 40px rgba(0,0,0,.4); color-scheme: dark; }
+:root[data-palette="midnight"] .btn-danger { color: #1a0d0c; }
+:root[data-palette] .btn-danger { color: #fff; }
+:root[data-palette="midnight"] .btn-danger { color: #1a0d0c; }
+.theme-wrap { position: relative; display: flex; align-items: center; }
+.theme-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--surface); display: grid; place-items: center; cursor: pointer; padding: 0; }
+.theme-dot, .swatch { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); display: inline-block; flex: none; }
+.theme-menu { position: absolute; top: calc(100% + 8px); right: -8px; z-index: 40; width: 220px; max-width: calc(100vw - 32px); padding: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-lg); display: grid; gap: 2px; }
+.theme-menu[hidden] { display: none; }
+.theme-opt { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 40px; padding: 0 10px; border: 0; border-radius: 9px; background: none; text-align: left; font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; }
+.theme-opt[aria-checked="true"] { background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
+.theme-opt .check { margin-left: auto; width: 16px; height: 16px; }
+.swatch.lg { width: 20px; height: 20px; }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+h1, h2, h3 { margin: 0; line-height: 1.2; text-wrap: balance; letter-spacing: -0.015em; }
+p { margin: 0; }
+button, input, select { font: inherit; color: inherit; }
+button, .flashcard, .tile, .choice, .tab { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[tabindex="-1"]:focus { outline: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- Header ---------- */
+.header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--border); }
+.wrap { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.header-row { display: flex; align-items: center; gap: 16px; height: 56px; }
+.brand-name { overflow: hidden; text-overflow: ellipsis; }
+.brand { min-width: 0; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; background: none; border: 0; padding: 4px 0; cursor: pointer; white-space: nowrap; }
+.brand-mark { width: 26px; height: 26px; border-radius: 7px; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-size: 13px; font-weight: 700; letter-spacing: -0.02em; }
+.nav-links { display: flex; gap: 2px; margin-left: auto; }
+.nav-link { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px; border-radius: var(--r-sm); border: 0; background: none; color: var(--muted); font-size: 14px; font-weight: 500; cursor: pointer; transition: background .15s, color .15s; }
+@media (hover: hover) { .nav-link:hover { background: var(--surface-2); color: var(--text); } }
+.nav-link[aria-current="page"] { color: var(--accent-ink); background: var(--accent-soft); }
+.nav-badge { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--accent); color: var(--on-accent); font-size: 11px; font-weight: 600; display: inline-grid; place-items: center; }
+.tabbar { display: none; }
+@media (max-width: 820px) {
+  .nav-links { display: none; }
+  .header-row { height: 52px; }
+  .tabbar { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 6px max(6px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(6px, env(safe-area-inset-left, 0px)); }
+  .tab { position: relative; display: grid; justify-items: center; gap: 3px; padding: 6px 0 4px; border: 0; background: none; border-radius: 10px; color: var(--faint); font-size: 10.5px; font-weight: 550; cursor: pointer; min-width: 0; }
+  .tab svg { width: 22px; height: 22px; }
+  .tab[aria-current="page"] { color: var(--accent-ink); }
+  .tab .tab-dot { position: absolute; top: 2px; left: calc(50% + 8px); min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--accent); color: var(--on-accent); font-size: 10px; display: grid; place-items: center; }
+  body.typing .tabbar { display: none; }
+  main { padding-block: 20px calc(96px + env(safe-area-inset-bottom, 0px)) !important; }
+  footer { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important; }
+}
+
+/* ---------- Main ---------- */
+main { padding-block: 32px 64px; }
+.screen { display: grid; gap: 28px; }
+.screen.enter { animation: enter .28s ease both; }
+@keyframes enter { from { opacity: .001; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.page-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 20px; }
+.page-head h1 { font-size: 26px; font-weight: 650; }
+.page-head p { color: var(--muted); margin-top: 4px; }
+.eyebrow { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--faint); }
+.section { display: grid; gap: 14px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.section-head h2 { font-size: 16px; font-weight: 600; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+
+/* ---------- Buttons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid transparent; font-size: 14px; font-weight: 550; cursor: pointer; transition: background .15s, border-color .15s, color .15s, transform .08s, box-shadow .15s; white-space: nowrap; text-decoration: none; }
+.btn:active:not(:disabled) { transform: scale(.98); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn-primary { background: var(--accent); color: var(--on-accent); box-shadow: 0 1px 2px rgba(40, 30, 160, .2); }
+@media (hover: hover) { .btn-primary:hover:not(:disabled) { background: var(--accent-hover); } }
+.btn-secondary { background: var(--surface); border-color: var(--border-strong); color: var(--text); }
+@media (hover: hover) { .btn-secondary:hover:not(:disabled) { background: var(--surface-2); } }
+.btn-ghost { background: transparent; color: var(--muted); }
+@media (hover: hover) { .btn-ghost:hover:not(:disabled) { background: var(--surface-2); color: var(--text); } }
+.btn-danger { background: var(--bad); color: #fff; }
+@media (hover: hover) { .btn-danger:hover:not(:disabled) { filter: brightness(1.08); } }
+:root[data-theme="dark"] .btn-danger { color: #1a0d0c; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-danger { color: #1a0d0c; } }
+.btn-lg { min-height: 48px; padding: 0 22px; font-size: 15px; border-radius: 12px; }
+.btn-sm { min-height: 32px; padding: 0 11px; font-size: 13px; border-radius: 8px; }
+.btn-icon { width: 40px; padding: 0; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn-row.center { justify-content: center; }
+
+/* ---------- Cards / surfaces ---------- */
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow); }
+.panel-pad { padding: 24px; }
+@media (max-width: 520px) { .panel-pad { padding: 18px; } }
+
+/* ---------- Home ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; }
+.hero h1 { font-size: clamp(30px, 5vw, 42px); font-weight: 700; letter-spacing: -0.03em; }
+.hero p.sub { font-size: 17px; color: var(--muted); margin-top: 8px; }
+.hero-cta { display: grid; gap: 8px; justify-items: end; text-align: right; }
+.hero-cta .hint { font-size: 13px; color: var(--muted); max-width: 30ch; }
+@media (max-width: 640px) { .hero { grid-template-columns: 1fr; } .hero-cta { justify-items: stretch; text-align: left; } .hero-cta .btn { width: 100%; } }
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
+.stat { background: var(--surface); padding: 16px 18px; display: grid; gap: 4px; min-width: 0; }
+.stat-label { font-size: 12.5px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.stat-label svg { width: 14px; height: 14px; color: var(--faint); }
+.stat-value { font-size: 24px; font-weight: 650; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.stat-value small { font-size: 14px; font-weight: 500; color: var(--faint); }
+@media (max-width: 640px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.overall { display: grid; gap: 10px; }
+.overall-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+.bar { height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; display: flex; }
+.bar > span { display: block; height: 100%; transition: width .35s ease; }
+.bar .fill { background: var(--accent); }
+.bar .fill-2 { background: var(--accent-soft); background: color-mix(in srgb, var(--accent) 35%, var(--surface-2)); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); }
+.legend .lg-mid { background: var(--accent-soft); background: color-mix(in srgb, var(--accent) 35%, var(--surface-2)); }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+
+.modes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 820px) { .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.mode-card { text-align: left; display: grid; gap: 10px; align-content: start; padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); cursor: pointer; transition: border-color .15s, box-shadow .15s, transform .15s; min-width: 0; }
+@media (hover: hover) { .mode-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow); transform: translateY(-1px); } }
+.mode-card:active { background: var(--surface-2); }
+.mode-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; }
+.mode-icon svg { width: 18px; height: 18px; }
+.mode-card h3 { font-size: 15px; font-weight: 600; }
+.mode-card p { font-size: 13px; color: var(--muted); line-height: 1.45; }
+.mode-card .resume { font-size: 12px; font-weight: 600; color: var(--accent-ink); }
+
+/* ---------- Word rows ---------- */
+.rows { display: grid; }
+.row { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) auto; gap: 6px 16px; align-items: center; padding: 13px 18px; border-top: 1px solid var(--border); }
+.row:first-child { border-top: 0; }
+.row .en { font-weight: 550; min-width: 0; overflow-wrap: anywhere; }
+.row .ru { color: var(--muted); min-width: 0; overflow-wrap: anywhere; }
+.row .meta { display: flex; gap: 8px; align-items: center; justify-content: flex-end; flex-wrap: wrap; }
+@media (max-width: 600px) { .row { grid-template-columns: minmax(0, 1fr) auto; } .row .ru { grid-column: 1; grid-row: 2; } .row .meta { grid-column: 2; grid-row: 1 / span 2; flex-direction: column; align-items: flex-end; } }
+
+.chip { display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 6px; font-size: 12px; font-weight: 550; white-space: nowrap; background: var(--surface-2); color: var(--muted); }
+.chip-accent { background: var(--accent-soft); color: var(--accent-ink); }
+.chip-ok { background: var(--ok-soft); color: var(--ok); }
+.chip-bad { background: var(--bad-soft); color: var(--bad); }
+.chip-warn { background: var(--warn-soft); color: var(--warn); }
+
+.empty { text-align: center; padding: 36px 20px; display: grid; gap: 10px; justify-items: center; }
+.empty .empty-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--surface-2); color: var(--faint); display: grid; place-items: center; }
+.empty .empty-icon svg { width: 22px; height: 22px; }
+.empty h3 { font-size: 16px; font-weight: 600; }
+.empty p { color: var(--muted); max-width: 46ch; font-size: 14px; }
+
+/* ---------- Study stage ---------- */
+.stage { max-width: 680px; width: 100%; margin: 0 auto; display: grid; gap: 20px; }
+.stage-top { display: grid; gap: 10px; }
+.stage-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); }
+.stage-meta strong { color: var(--text); font-weight: 600; }
+.stage-meta .btn-row { align-items: center; gap: 4px 10px; justify-content: flex-end; }
+
+.flashcard { -webkit-user-select: none; user-select: none; -webkit-perspective: 1400px; perspective: 1400px; width: 100%; border: 0; padding: 0; background: none; cursor: pointer; display: block; text-align: center; border-radius: var(--r-lg); }
+.fc-inner { position: relative; min-height: 300px; transition: transform .5s cubic-bezier(.2,.7,.2,1); -webkit-transform-style: preserve-3d; transform-style: preserve-3d; }
+@media (max-width: 520px) { .fc-inner { min-height: 240px; } }
+.flashcard.flipped .fc-inner { transform: rotateY(180deg); }
+.fc-inner, .fc-face, .fc-label, .fc-text, .fc-hint { display: block; }
+.fc-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-lg); display: grid; grid-template-rows: auto 1fr auto; padding: 20px 24px; -webkit-backface-visibility: hidden; }
+.fc-front { transform: rotateY(0deg); }
+.fc-back { -webkit-transform: rotateY(180deg); transform: rotateY(180deg); }
+.fc-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--faint); font-weight: 500; }
+.fc-text { align-self: center; font-size: clamp(24px, 4.6vw, 34px); font-weight: 650; letter-spacing: -0.02em; line-height: 1.25; overflow-wrap: anywhere; padding: 12px 0; }
+.fc-back .fc-text { font-weight: 550; }
+.fc-hint { font-size: 12.5px; color: var(--faint); }
+.flashcard { cursor: default; }
+.fc-form { display: grid; gap: 10px; }
+.feedback.neutral { background: var(--warn-soft); color: var(--warn); }
+.feedback.neutral .fb-title { color: var(--warn); }
+@media (hover: hover) { .flashcard:hover .fc-face { border-color: var(--border-strong); } }
+.fc-controls { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; }
+.fc-controls .btn-row { gap: 4px; }
+@media (max-width: 400px) { .fc-controls .btn-sm { padding: 0 8px; } }
+.fc-rate { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fc-rate .btn { width: 100%; }
+.btn-know { background: var(--ok-soft); color: var(--ok); border-color: var(--ok-line); }
+@media (hover: hover) { .btn-know:hover:not(:disabled) { filter: brightness(.97); } }
+.btn-practice { background: var(--warn-soft); color: var(--warn); border-color: color-mix(in srgb, var(--warn) 30%, transparent); }
+@media (hover: hover) { .btn-practice:hover:not(:disabled) { filter: brightness(.97); } }
+.btn.is-on { box-shadow: inset 0 0 0 2px currentColor; }
+.kbd-hint { text-align: center; font-size: 12px; color: var(--faint); }
+kbd { font-family: inherit; font-size: 11px; padding: 1px 5px; border-radius: 4px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--muted); }
+@media (hover: none) { .kbd-hint { display: none; } }
+
+.question { text-align: center; padding: 32px 24px; display: grid; gap: 10px; }
+.question .q-text { font-size: clamp(22px, 4vw, 28px); font-weight: 600; letter-spacing: -0.015em; line-height: 1.3; overflow-wrap: anywhere; }
+.options { display: grid; gap: 10px; }
+.option { display: grid; grid-template-columns: 28px minmax(0, 1fr) 20px; gap: 12px; align-items: center; text-align: left; width: 100%; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); cursor: pointer; font-size: 15px; font-weight: 500; transition: border-color .15s, background .15s; }
+@media (hover: hover) { .option:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); } }
+.option:disabled { cursor: default; }
+.option .key { width: 26px; height: 26px; border-radius: 7px; border: 1px solid var(--border-strong); display: grid; place-items: center; font-size: 12px; font-weight: 600; color: var(--muted); }
+.option .mark svg { width: 18px; height: 18px; }
+.option.correct { background: var(--ok-soft); border-color: var(--ok-line); color: var(--ok); }
+.option.wrong { background: var(--bad-soft); border-color: var(--bad-line); color: var(--bad); }
+.option.dim { opacity: .55; }
+.option span { overflow-wrap: anywhere; }
+
+.feedback { border-radius: var(--r); padding: 14px 16px; display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 14px; }
+.feedback svg { width: 20px; height: 20px; margin-top: 1px; }
+.feedback.ok { background: var(--ok-soft); color: var(--ok); }
+.feedback.bad { background: var(--bad-soft); color: var(--bad); }
+.feedback .fb-body { display: grid; gap: 4px; color: var(--text); }
+.feedback .fb-title { font-weight: 600; }
+.feedback.ok .fb-title { color: var(--ok); }
+.feedback.bad .fb-title { color: var(--bad); }
+
+.field { display: grid; gap: 8px; }
+.field label { font-size: 13px; font-weight: 550; color: var(--muted); }
+.input { width: 100%; height: 50px; padding: 0 16px; border-radius: var(--r); border: 1px solid var(--border-strong); background: var(--surface); font-size: 17px; transition: border-color .15s, box-shadow .15s; }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.input.is-ok { border-color: var(--ok-line); background: var(--ok-soft); }
+.input.is-bad { border-color: var(--bad-line); background: var(--bad-soft); }
+.input-sm { height: 40px; font-size: 16px; width: 96px; padding: 0 10px; }
+.error { font-size: 13px; color: var(--bad); }
+
+/* ---------- Match ---------- */
+.match-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.match-stats { display: flex; gap: 16px; font-size: 14px; color: var(--muted); }
+.match-stats b { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+.match-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.match-col { display: grid; gap: 8px; align-content: start; }
+.match-col h3 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--faint); padding: 0 2px; }
+.tile { width: 100%; min-height: 54px; padding: 10px 14px; text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); cursor: pointer; font-size: 14.5px; font-weight: 500; line-height: 1.35; overflow-wrap: anywhere; transition: border-color .15s, background .15s, opacity .25s, transform .15s; }
+@media (hover: hover) { .tile:hover:not(:disabled) { border-color: var(--border-strong); background: var(--surface-2); } }
+.tile[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-ink); box-shadow: 0 0 0 1px var(--accent); }
+.tile.matched { background: var(--ok-soft); border-color: var(--ok-line); color: var(--ok); cursor: default; opacity: .7; }
+.tile.flash { border-color: var(--bad-line); background: var(--bad-soft); color: var(--bad); animation: shake .32s ease; }
+@keyframes shake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+@media (max-width: 480px) { .tile { font-size: 14px; padding: 10px 11px; min-height: 58px; } .match-grid { gap: 8px; } }
+
+/* ---------- Setup ---------- */
+.choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; border: 0; padding: 0; margin: 0; }
+.choices legend { padding: 0; margin-bottom: 10px; font-size: 13px; font-weight: 550; color: var(--muted); }
+@media (max-width: 520px) { .choices { grid-template-columns: 1fr; } }
+.choice { position: relative; display: grid; gap: 4px; padding: 16px; border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); cursor: pointer; transition: border-color .15s, background .15s; }
+@media (hover: hover) { .choice:hover { border-color: var(--border-strong); } }
+.choice > input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+.choice:has(> input:checked) { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 1px var(--accent); }
+.choice:has(> input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.choice:has(> input:disabled) { opacity: .5; cursor: not-allowed; }
+.choice-title { font-weight: 600; font-size: 14.5px; display: flex; justify-content: space-between; gap: 8px; }
+.choice-title .count { color: var(--faint); font-weight: 500; font-variant-numeric: tabular-nums; }
+.choice-desc { font-size: 13px; color: var(--muted); }
+.custom-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+.resume-box { display: flex; justify-content: space-between; align-items: center; gap: 12px 16px; flex-wrap: wrap; padding: 16px 18px; border-radius: var(--r); background: var(--accent-soft); }
+.resume-box p { font-size: 14px; }
+.resume-box strong { font-weight: 600; }
+
+/* ---------- Completion ---------- */
+.done { text-align: center; display: grid; gap: 20px; justify-items: center; padding: 36px 24px; }
+.done-badge { width: 56px; height: 56px; border-radius: 16px; background: var(--ok-soft); color: var(--ok); display: grid; place-items: center; }
+.done-badge svg { width: 28px; height: 28px; }
+.done h2 { font-size: 24px; font-weight: 650; }
+.done-stats { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.done-stats div { display: grid; gap: 2px; }
+.done-stats b { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.done-stats span { font-size: 12.5px; color: var(--muted); }
+.mistake-list { width: 100%; text-align: left; }
+
+/* ---------- Progress ---------- */
+.chart { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 6px; align-items: end; height: 140px; padding-top: 8px; }
+.chart-col { display: grid; grid-template-rows: 1fr auto; gap: 6px; height: 100%; min-width: 0; }
+.chart-bar-wrap { display: flex; align-items: flex-end; height: 100%; }
+.chart-bar { width: 100%; border-radius: 4px 4px 2px 2px; background: var(--accent-soft); background: color-mix(in srgb, var(--accent) 30%, var(--surface-2)); min-height: 2px; position: relative; }
+.chart-bar.today { background: var(--accent); }
+.chart-bar.zero { background: var(--surface-2); }
+.chart-day { text-align: center; font-size: 11px; color: var(--faint); font-variant-numeric: tabular-nums; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter { height: 30px; padding: 0 11px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; }
+@media (hover: hover) { .filter:hover { color: var(--text); border-color: var(--border-strong); } }
+.filter[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; font-size: 12px; font-weight: 600; color: var(--faint); text-transform: uppercase; letter-spacing: .06em; padding: 12px 16px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td.en { font-weight: 550; min-width: 160px; }
+td.ru { color: var(--muted); min-width: 160px; }
+td.id { color: var(--faint); font-variant-numeric: tabular-nums; width: 1%; }
+.settings { display: grid; gap: 0; }
+.setting { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 20px; border-top: 1px solid var(--border); }
+.setting:first-child { border-top: 0; }
+.setting h3 { font-size: 14.5px; font-weight: 600; }
+.setting p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.select { height: 38px; padding: 0 12px; border-radius: 9px; border: 1px solid var(--border-strong); background: var(--surface); font-size: 16px; }
+.notice { padding: 12px 16px; border-radius: var(--r); background: var(--warn-soft); color: var(--warn); font-size: 13.5px; }
+
+/* ---------- Dialog / toast / confetti ---------- */
+.overlay { position: fixed; inset: 0; z-index: 50; background: rgba(15, 15, 25, .42); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-left, 0px)); animation: fade .15s ease both; }
+@keyframes fade { from { opacity: 0; } }
+.dialog { width: min(420px, 100%); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-lg); padding: 24px; display: grid; gap: 12px; animation: pop .18s ease both; }
+@keyframes pop { from { transform: scale(.97); opacity: 0; } }
+.dialog h2 { font-size: 18px; font-weight: 650; }
+.dialog p { color: var(--muted); font-size: 14px; }
+.dialog .btn-row { justify-content: flex-end; margin-top: 8px; }
+.toasts { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 60; display: grid; gap: 8px; justify-items: center; pointer-events: none; width: max-content; max-width: calc(100% - 32px); }
+.toast { background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 13.5px; font-weight: 500; box-shadow: var(--shadow-lg); animation: toastIn .2s ease both; }
+@media (max-width: 820px) { .toasts { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); } }
+@keyframes toastIn { from { transform: translateY(8px); opacity: 0; } }
+.confetti { position: fixed; left: 50%; top: 38%; z-index: 40; pointer-events: none; }
+.confetti i { position: absolute; width: 7px; height: 7px; border-radius: 2px; animation: burst 1.1s cubic-bezier(.15,.7,.3,1) forwards; }
+@keyframes burst { 0% { transform: translate(0,0) rotate(0); opacity: 1; } 100% { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 0; } }
+
+/* ---------- Test ---------- */
+.choice-wide { grid-column: 1 / -1; }
+.tile.paired { border-color: var(--accent); background: var(--accent-soft); color: var(--text); display: flex; align-items: center; gap: 10px; }
+.tile .pair-no { flex: none; width: 22px; height: 22px; border-radius: 6px; background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+.tile .tile-txt { min-width: 0; overflow-wrap: break-word; }
+.tile, .option, .fc-text, .q-text, .row .ru, td.ru, td.ans { -webkit-hyphens: auto; hyphens: auto; }
+.tile { overflow-wrap: break-word; }
+.choices.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 640px) { .choices.three { grid-template-columns: 1fr; } }
+.count-row { display: flex; align-items: center; gap: 14px; }
+.count-row input[type="range"] { flex: 1; min-width: 0; accent-color: var(--accent); height: 28px; }
+.protect-note { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; padding: 12px 14px; border-radius: var(--r); background: var(--surface-2); font-size: 13px; color: var(--muted); }
+.protect-note svg { width: 18px; height: 18px; margin-top: 1px; }
+.test-top { display: flex; align-items: center; justify-content: space-between; gap: 8px 12px; flex-wrap: wrap; }
+.test-top .left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 0; }
+.timer { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 10px; border-radius: 8px; background: var(--surface-2); font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; }
+.timer svg { width: 15px; height: 15px; }
+.timer.warn { background: var(--bad-soft); color: var(--bad); }
+.option.selected { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-ink); box-shadow: 0 0 0 1px var(--accent); }
+.tf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tf-row .option { grid-template-columns: auto auto; justify-content: center; padding: 18px; font-size: 16px; font-weight: 600; }
+.tf-eq { color: var(--faint); display: flex; justify-content: center; }
+.tf-eq svg { width: 18px; height: 18px; transform: rotate(90deg); }
+.q-ru { font-weight: 500; }
+.score-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; width: 100%; }
+.score { display: grid; gap: 2px; padding: 16px 24px; border-radius: var(--r); background: var(--surface-2); min-width: 140px; }
+.score b { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.score b small { font-size: 18px; font-weight: 500; color: var(--faint); }
+.score span { font-size: 12.5px; color: var(--muted); }
+td.ans { min-width: 150px; }
+.mode-card.wide { grid-column: 1 / -1; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; }
+.mode-card.wide .go { color: var(--accent-ink); }
+.mode-card.wide .go svg { width: 18px; height: 18px; }
+body.test-active main { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+body.test-active main input { -webkit-user-select: text; user-select: text; }
+.shield { position: fixed; inset: 0; z-index: 45; background: var(--bg); display: grid; place-items: center; text-align: center; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.shield-box { max-width: 380px; display: grid; gap: 12px; justify-items: center; }
+.shield-box .empty-icon { width: 48px; height: 48px; border-radius: 14px; background: var(--warn-soft); color: var(--warn); display: grid; place-items: center; }
+.shield-box .empty-icon svg { width: 24px; height: 24px; }
+.shield-box h2 { font-size: 20px; }
+@media print { body.test-active main, body.test-active .shield { display: none !important; } }
+
+footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .confetti { display: none; }
+}
+</style>
+
+<header class="header">
+  <div class="wrap">
+    <div class="header-row">
+      <button class="brand" type="button" data-action="go" data-route="home" aria-label="Project for RGIIS, go to Home">
+        <span class="brand-mark" aria-hidden="true">R</span>
+        <span class="brand-name">Project for RGIIS</span>
+      </button>
+      <div class="theme-wrap">
+        <button class="theme-btn" type="button" id="theme-btn" data-action="toggleThemes" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu" aria-label="Choose color theme"><span class="theme-dot" aria-hidden="true"></span></button>
+        <div class="theme-menu" id="theme-menu" role="menu" aria-label="Color theme" hidden></div>
+      </div>
+      <nav class="nav-links" id="nav-desktop" aria-label="Main"></nav>
+    </div>
+  </div>
+</header>
+<main id="main" class="wrap" tabindex="-1"><div class="panel panel-pad" style="display:grid;gap:8px"><h1 style="font-size:20px">Project for RGIIS</h1><p class="muted">Loading… If this message stays, the app is open in a preview that does not run scripts (for example, the Telegram file viewer). Open it in Safari or Chrome instead.</p></div></main>
+<nav class="tabbar" id="nav-mobile" aria-label="Main"></nav>
+<footer class="wrap" id="footer"></footer>
+<div id="dialog-root"></div>
+<div id="shield-root"></div>
+<div class="toasts" id="toasts" aria-live="polite" role="status"></div>
+<div class="sr-only" id="announcer" aria-live="assertive"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     1. VOCABULARY DATA (source of truth)
+     ========================================================= */
+  const vocabulary = [
+    { id: 1, english: "advance to a new level", russian: "продвигаться на новый уровень" },
+    { id: 2, english: "be essential to human progress", russian: "быть необходимым для прогресса человечества" },
+    { id: 3, english: "benefit", russian: "привилегия, преимущество" },
+    { id: 4, english: "beneficial", russian: "полезный" },
+    { id: 5, english: "benefit from", russian: "выигрывать, извлекать пользу" },
+    { id: 6, english: "brainstorm for the unique solution", russian: "искать уникальное решение" },
+    { id: 7, english: "come up with an invention", russian: "придумать изобретение" },
+    { id: 8, english: "contribute", russian: "способствовать" },
+    { id: 9, english: "contribution", russian: "вклад" },
+    { id: 10, english: "discover", russian: "открыть, обнаружить" },
+    { id: 11, english: "discovery", russian: "открытие" },
+    { id: 12, english: "discoverable", russian: "подлежащий открытию, обнаружению" },
+    { id: 13, english: "encourage innovation and creativity", russian: "поощрять инновации и творчество" },
+    { id: 14, english: "encouragement", russian: "ободрение" },
+    { id: 15, english: "encouraging", russian: "ободряющий" },
+    { id: 16, english: "enforce", russian: "обеспечить принудительное исполнение" },
+    { id: 17, english: "enforcement", russian: "принудительное исполнение" },
+    { id: 18, english: "explore", russian: "исследовать" },
+    { id: 19, english: "exploration", russian: "исследование" },
+    { id: 20, english: "explorative", russian: "исследовательский" },
+    { id: 21, english: "generate revenue and stay competitive", russian: "генерировать доход и сохранять конкурентоспособность" },
+    { id: 22, english: "have a significant impact on", russian: "оказывать значительное влияние на" },
+    { id: 23, english: "improve upon an existing technology", russian: "усовершенствовать существующую технологию" },
+    { id: 24, english: "infringe", russian: "нарушать" },
+    { id: 25, english: "infringement", russian: "нарушение" },
+    { id: 26, english: "invent", russian: "изобретать" },
+    { id: 27, english: "invention", russian: "изобретение" },
+    { id: 28, english: "inventive", russian: "изобретательный" },
+    { id: 29, english: "lead to a groundbreaking breakthrough", russian: "привести к революционному прорыву" },
+    { id: 30, english: "play a crucial role", russian: "играть решающую роль" },
+    { id: 31, english: "prevent somebody from using something without permission", russian: "предотвратить использование без разрешения" },
+    { id: 32, english: "protect intellectual rights", russian: "защита интеллектуальных прав" },
+    { id: 33, english: "protection", russian: "защита" },
+    { id: 34, english: "protective", russian: "защитный" },
+    { id: 35, english: "provide incentives for", russian: "создавать стимулы для" },
+    { id: 36, english: "provision", russian: "обеспечение, предоставление" },
+    { id: 37, english: "remain a vital aspect", russian: "остаются жизненно важным аспектом" },
+    { id: 38, english: "restrict access to", russian: "ограничить доступ к" },
+    { id: 39, english: "restriction", russian: "ограничение" },
+    { id: 40, english: "restrictive", russian: "ограничительный" },
+    { id: 41, english: "revolutionize", russian: "преображать коренным образом" },
+    { id: 42, english: "serve the public interest", russian: "служить общественным интересам" },
+    { id: 43, english: "shape the way we live", russian: "формировать наш образ жизни" },
+    { id: 44, english: "spot a need", russian: "выявить потребность" },
+    { id: 45, english: "stifle innovation", russian: "сдерживать инновации" }
+  ];
+  Object.freeze(vocabulary);
+
+  // Accepted alternative spellings for Write mode. Only harmless variants; every content word is kept.
+  const ALTERNATIVES = {
+    6: ["brainstorm for a unique solution"],
+    23: ["improve on an existing technology"],
+    31: ["prevent someone from using something without permission"]
+  };
+  // Pairs a learner could reasonably confuse even though their translations differ.
+  const MANUAL_CONFLICTS = [[7, 26], [31, 38]];
+
+  const BY_ID = new Map(vocabulary.map(v => [v.id, v]));
+  const ALL_IDS = vocabulary.map(v => v.id);
+  const TOTAL = vocabulary.length;
+  const isValidId = id => BY_ID.has(id);
+  const word = id => BY_ID.get(id);
+
+  /* Conflict map: entries whose translations are identical or contain one another
+     (e.g. "защита" / "защита интеллектуальных прав") never appear together as options or on one Match board. */
+  const normRu = s => ' ' + s.toLowerCase().replace(/[.,;:()]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+  const CONFLICTS = new Map(ALL_IDS.map(id => [id, new Set()]));
+  for (let i = 0; i < vocabulary.length; i++) {
+    for (let j = i + 1; j < vocabulary.length; j++) {
+      const a = vocabulary[i], b = vocabulary[j];
+      const ra = normRu(a.russian), rb = normRu(b.russian);
+      const partsA = a.russian.split(',').map(p => normRu(p)), partsB = b.russian.split(',').map(p => normRu(p));
+      const overlap = ra.includes(rb) || rb.includes(ra) || partsA.some(p => partsB.includes(p)) ||
+        a.english.toLowerCase() === b.english.toLowerCase();
+      if (overlap) { CONFLICTS.get(a.id).add(b.id); CONFLICTS.get(b.id).add(a.id); }
+    }
+  }
+  MANUAL_CONFLICTS.forEach(([a, b]) => { CONFLICTS.get(a).add(b); CONFLICTS.get(b).add(a); });
+  const conflicts = (a, b) => CONFLICTS.get(a).has(b);
+
+  /* =========================================================
+     2. UTILITIES
+     ========================================================= */
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const pct = (n, d) => d > 0 ? Math.round((n / d) * 100) : 0;
+  const clampInt = (n, min, max) => Math.min(max, Math.max(min, Math.round(n)));
+  const wordCount = s => s.trim().split(/\s+/).length;
+  const dayKey = (d = new Date()) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const plural = (n, one, many) => n + ' ' + (n === 1 ? one : (many || one + 's'));
+  const fmtTime = ms => { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+  const normalizeAnswer = s => String(s).toLowerCase().replace(/[‘’ʼ`]/g, "'").replace(/[–—]/g, '-')
+    .replace(/\s+/g, ' ').trim().replace(/[.!?;,]+$/, '').trim();
+  const acceptedAnswers = id => [word(id).english].concat(ALTERNATIVES[id] || []).map(normalizeAnswer);
+  function levenshtein(a, b) {
+    if (a === b) return 0;
+    const m = a.length, n = b.length; if (!m) return n; if (!n) return m;
+    let prev = Array.from({ length: n + 1 }, (_, i) => i);
+    for (let i = 1; i <= m; i++) {
+      const cur = [i];
+      for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = cur;
+    }
+    return prev[n];
+  }
+  const reducedMotion = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* =========================================================
+     3. PERSISTENCE (localStorage with graceful fallback)
+     ========================================================= */
+  const STORE_KEY = 'innovation-vocab:v1';
+  const SCHEMA = 1;
+  const Storage = (function () {
+    let available = false;
+    try { const k = '__vocab_probe__'; localStorage.setItem(k, '1'); localStorage.removeItem(k); available = true; } catch (e) { available = false; }
+    return {
+      get available() { return available; },
+      load() { if (!available) return null; try { const raw = localStorage.getItem(STORE_KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } },
+      save(data) { if (!available) return; try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch (e) { available = false; } },
+      clear() { if (!available) return; try { localStorage.removeItem(STORE_KEY); } catch (e) { /* ignore */ } }
+    };
+  })();
+
+  const REVIEW_STEPS = 4;                                  // correct spaced answers needed to clear a word
+  const REVIEW_INTERVALS = [0, 10 * 60e3, 12 * 3600e3, 2 * 86400e3];
+  const MASTERED_RUN = 3;
+  const MODES = ['flashcards', 'learn', 'write', 'match'];
+  const TASK_KINDS = ['tf', 'match', 'mc-en', 'mc-ru', 'type-en', 'type-ru'];
+  const TASK_LABEL = { tf: 'True or False', match: 'Match pairs', 'mc-en': 'Choose the English expression', 'mc-ru': 'Choose the Russian translation', 'type-en': 'Type the English expression', 'type-ru': 'Type the Russian translation' };
+  const TEST_TYPES = [
+    ['combined', 'Combined', 'Every task type mixed in one test.'],
+    ['tf', 'True or False', 'Decide whether a translation is right.'],
+    ['match', 'Match pairs', 'Connect 4 expressions with their translations.'],
+    ['mc-en', 'Choose the English expression', 'Russian prompt, pick the English.'],
+    ['mc-ru', 'Choose the Russian translation', 'English prompt, pick the Russian.'],
+    ['type-en', 'Type the English expression', 'Russian prompt, type the English.'],
+    ['type-ru', 'Type the Russian translation', 'English prompt, type the Russian.']
+  ];
+  const TEST_TYPE_IDS = TEST_TYPES.map(t => t[0]);
+  const testTypeName = id => (TEST_TYPES.find(t => t[0] === id) || TEST_TYPES[0])[1];
+  const defaultTestConfig = () => ({ count: 20, type: 'combined', timer: 'off', minutes: 10, seconds: 30, feedback: 'end' });
+  const asObj = o => (o && typeof o === 'object' && !Array.isArray(o)) ? o : {};
+  function sanitizeTestConfig(c) {
+    c = asObj(c); const d = defaultTestConfig();
+    const int = (v, min, max, def) => { const n = Number(v); return Number.isInteger(n) && n >= min && n <= max ? n : def; };
+    return { count: int(c.count, 1, TOTAL, Math.min(d.count, TOTAL)), type: TEST_TYPE_IDS.includes(c.type) ? c.type : d.type,
+      timer: ['off', 'total', 'per'].includes(c.timer) ? c.timer : d.timer, minutes: int(c.minutes, 1, 180, d.minutes),
+      seconds: int(c.seconds, 5, 600, d.seconds), feedback: 'end' };
+  }
+  const PALETTES = [['purple', 'Purple', '#4F46E5'], ['white', 'White', '#18181B'], ['burgundy', 'Burgundy', '#7A1E2C'], ['sakura', 'Sakura', '#C93A6E'], ['ocean', 'Ocean', '#0B6BCB'], ['forest', 'Forest', '#2F6B45'], ['sand', 'Sand', '#9A6A2F'], ['midnight', 'Midnight', '#8A90FF']];
+  const defaultState = () => ({ version: SCHEMA, words: {}, review: {}, days: {}, totals: { correct: 0, wrong: 0, sessions: 0 }, settings: { dailyGoal: 10, palette: 'purple', testConfig: defaultTestConfig() }, sessions: {}, test: null, testHistory: [] });
+  const nn = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0) ? v : 0;
+  const GOALS = [0, 5, 10, 15, 20, 30];
+
+  function sanitize(raw) {
+    const s = defaultState();
+    if (!raw || typeof raw !== 'object') return s;
+    const obj = (o) => (o && typeof o === 'object' && !Array.isArray(o)) ? o : {};
+    Object.entries(obj(raw.words)).forEach(([k, w]) => {
+      const id = Number(k); if (!isValidId(id) || !w || typeof w !== 'object') return;
+      s.words[id] = { seen: nn(w.seen), correct: nn(w.correct), wrong: nn(w.wrong), run: nn(w.run), last: nn(w.last) };
+    });
+    Object.entries(obj(raw.review)).forEach(([k, r]) => {
+      const id = Number(k); if (!isValidId(id) || !r || typeof r !== 'object') return;
+      s.review[id] = { mistakes: nn(r.mistakes), level: Math.min(REVIEW_STEPS - 1, nn(r.level)), priority: Math.min(10, nn(r.priority)), due: nn(r.due), flagged: !!r.flagged, added: nn(r.added) || Date.now() };
+    });
+    Object.entries(obj(raw.days)).forEach(([k, d]) => {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(k) || !d || typeof d !== 'object') return;
+      const ids = Array.isArray(d.ids) ? Array.from(new Set(d.ids.map(Number).filter(isValidId))) : [];
+      s.days[k] = { ids, answered: nn(d.answered), correct: nn(d.correct), wrong: nn(d.wrong) };
+    });
+    const t = obj(raw.totals);
+    s.totals = { correct: nn(t.correct), wrong: nn(t.wrong), sessions: nn(t.sessions) };
+    const goal = Number(obj(raw.settings).dailyGoal);
+    s.settings.dailyGoal = GOALS.includes(goal) ? goal : 10;
+    s.settings.testConfig = sanitizeTestConfig(obj(raw.settings).testConfig);
+    const pal = obj(raw.settings).palette; s.settings.palette = PALETTES.some(x => x[0] === pal) ? pal : 'purple';
+    s.test = sanitizeTest(raw.test);
+    s.testHistory = (Array.isArray(raw.testHistory) ? raw.testHistory : []).filter(e => e && typeof e === 'object').slice(0, 20).map(e => ({
+      at: nn(e.at), count: Math.min(TOTAL, nn(e.count)), type: TEST_TYPE_IDS.includes(e.type) ? e.type : 'combined', percent: Math.min(100, nn(e.percent)),
+      points: Math.min(3, nn(e.points)), timeMs: nn(e.timeMs), timer: String(e.timer || '').slice(0, 40), leaves: nn(e.leaves), reason: String(e.reason || 'done').slice(0, 10) }));
+    Object.entries(obj(raw.sessions)).forEach(([mode, sess]) => {
+      const clean = sanitizeSession(mode, sess); if (clean) s.sessions[mode] = clean;
+    });
+    return s;
+  }
+  function sanitizeTest(t) {
+    if (!t || typeof t !== 'object' || !Array.isArray(t.tasks) || !t.tasks.length || t.tasks.length > TOTAL) return null;
+    const ids = a => Array.isArray(a) && a.length > 0 && a.every(isValidId);
+    const tasks = [];
+    for (const k of t.tasks) {
+      if (!k || !TASK_KINDS.includes(k.kind) || !isValidId(k.id)) return null;
+      const c = { kind: k.kind, id: k.id };
+      if (k.kind === 'tf') { if (!isValidId(k.shown)) return null; c.shown = k.shown; c.truth = k.shown === k.id; }
+      if (k.kind === 'mc-en' || k.kind === 'mc-ru') { if (!ids(k.options) || !k.options.includes(k.id)) return null; c.options = k.options.slice(0, 4); }
+      if (k.kind === 'match') {
+        if (!ids(k.ids) || !k.ids.includes(k.id) || !ids(k.left) || !ids(k.right)) return null;
+        c.ids = k.ids.slice(0, 6); c.left = k.left.filter(x => c.ids.includes(x)); c.right = k.right.filter(x => c.ids.includes(x));
+        if (c.left.length !== c.ids.length || c.right.length !== c.ids.length) return null;
+        c.pairs = {}; const used = new Set();
+        Object.entries(asObj(k.pairs)).forEach(([en, r]) => { const e2 = Number(en); if (c.ids.includes(e2) && c.ids.includes(r) && !used.has(r)) { c.pairs[e2] = r; used.add(r); } });
+      }
+      tasks.push(c);
+    }
+    const answers = {};
+    Object.entries(asObj(t.answers)).forEach(([k, a]) => {
+      const i = Number(k);
+      if (Number.isInteger(i) && i >= 0 && i < tasks.length && a && typeof a === 'object') {
+        const v = a.value;
+        answers[i] = { value: (typeof v === 'boolean' || isValidId(v) || typeof v === 'string') ? (typeof v === 'string' ? v.slice(0, 120) : v) : null,
+          score: Math.min(1, nn(a.score)), timedOut: !!a.timedOut, unanswered: !!a.unanswered };
+      }
+    });
+    const sel = t.sel;
+    return { config: sanitizeTestConfig(t.config), tasks, index: clampInt(nn(t.index), 0, tasks.length - 1), answers, startedAt: nn(t.startedAt) || Date.now(),
+      deadline: t.deadline ? nn(t.deadline) : null, qDeadline: t.qDeadline ? nn(t.qDeadline) : null, leaves: nn(t.leaves),
+      sel: (typeof sel === 'boolean' || isValidId(sel)) ? sel : null, draft: typeof t.draft === 'string' ? t.draft.slice(0, 120) : '' };
+  }
+  function sanitizeSession(mode, sess) {
+    if (!MODES.includes(mode) || !sess || typeof sess !== 'object' || !Array.isArray(sess.ids)) return null;
+    const ids = sess.ids.map(Number).filter(isValidId);
+    if (!ids.length || new Set(ids).size !== ids.length) return null;
+    const s = { mode, ids, index: clampInt(nn(sess.index), 0, ids.length - 1), results: {}, startedAt: nn(sess.startedAt) || Date.now(), updatedAt: nn(sess.updatedAt) || Date.now(), source: String(sess.source || 'all'), retry: !!sess.retry };
+    Object.entries(sess.results && typeof sess.results === 'object' ? sess.results : {}).forEach(([k, v]) => {
+      const id = Number(k); if (ids.includes(id) && ['correct', 'wrong', 'skipped', 'know', 'practice'].includes(v)) s.results[id] = v;
+    });
+    if (mode === 'flashcards' && sess.current && typeof sess.current === 'object') {
+      const c = sess.current;
+      if (c.id === ids[s.index] && ['front', 'typing', 'done'].includes(c.stage))
+        s.current = { id: c.id, stage: c.stage, value: typeof c.value === 'string' ? c.value.slice(0, 120) : '', outcome: ['know', 'wrong', 'practice'].includes(c.outcome) ? c.outcome : null, close: !!c.close };
+      if (s.current && s.current.stage === 'done' && !s.current.outcome) s.current.stage = 'front';
+    }
+    if (mode === 'learn' && sess.current && typeof sess.current === 'object') {
+      const c = sess.current, opts = Array.isArray(c.options) ? c.options.map(Number) : [];
+      if (c.id === ids[s.index] && opts.includes(c.id) && opts.every(isValidId) && new Set(opts).size === opts.length)
+        s.current = { id: c.id, options: opts, picked: isValidId(Number(c.picked)) && opts.includes(Number(c.picked)) ? Number(c.picked) : null };
+    }
+    if (mode === 'match') {
+      const rounds = Array.isArray(sess.rounds) ? sess.rounds.map(r => Array.isArray(r) ? r.map(Number).filter(id => ids.includes(id)) : []).filter(r => r.length) : [];
+      const flat = rounds.flat();
+      if (!rounds.length || flat.length !== ids.length || new Set(flat).size !== flat.length) return null;
+      s.rounds = rounds;
+      s.round = clampInt(nn(sess.round), 0, rounds.length - 1);
+      const cur = rounds[s.round];
+      const sameSet = a => Array.isArray(a) && a.length === cur.length && a.map(Number).every(id => cur.includes(id));
+      s.left = sameSet(sess.left) ? sess.left.map(Number) : shuffle(cur);
+      s.right = sameSet(sess.right) ? sess.right.map(Number) : shuffle(cur);
+      s.matched = Array.isArray(sess.matched) ? sess.matched.map(Number).filter(id => cur.includes(id)) : [];
+      s.roundWrong = Array.isArray(sess.roundWrong) ? sess.roundWrong.map(Number).filter(id => cur.includes(id)) : [];
+      s.wrongIds = Array.isArray(sess.wrongIds) ? sess.wrongIds.map(Number).filter(id => ids.includes(id)) : [];
+      s.mistakes = nn(sess.mistakes);
+      s.elapsed = nn(sess.elapsed);
+      if (s.matched.length >= cur.length) return null;
+    }
+    return s;
+  }
+
+  let state = sanitize(Storage.load());
+  function save() { Storage.save(state); }
+
+  /* =========================================================
+     4. LEARNING MODEL: stats, review scheduling, streaks
+     ========================================================= */
+
+  const wordStats = id => state.words[id] || (state.words[id] = { seen: 0, correct: 0, wrong: 0, run: 0, last: 0 });
+  function today() { const k = dayKey(); return state.days[k] || (state.days[k] = { ids: [], answered: 0, correct: 0, wrong: 0 }); }
+  function touchDay(id) { const d = today(); d.answered++; if (!d.ids.includes(id)) d.ids.push(id); return d; }
+  function ensureReview(id) {
+    return state.review[id] || (state.review[id] = { mistakes: 0, level: 0, priority: 0, due: Date.now(), flagged: false, added: Date.now() });
+  }
+  // Correct answer on a review word advances it only when due, so clearing requires spaced repetitions.
+  function advanceReview(id) {
+    const r = state.review[id]; if (!r) return;
+    const now = Date.now();
+    r.priority = Math.max(0, r.priority - 1);
+    if (r.due > now) return;
+    r.level++;
+    if (r.level >= REVIEW_STEPS) { delete state.review[id]; return 'cleared'; }
+    r.due = now + REVIEW_INTERVALS[r.level];
+  }
+  function recordAnswer(id, correct, silent) {
+    const w = wordStats(id), d = touchDay(id), now = Date.now();
+    w.seen++; w.last = now;
+    let cleared;
+    if (correct) {
+      w.correct++; w.run++; state.totals.correct++; d.correct++;
+      cleared = advanceReview(id);
+    } else {
+      w.wrong++; w.run = 0; state.totals.wrong++; d.wrong++;
+      const r = ensureReview(id);
+      r.mistakes++; r.level = 0; r.due = now;
+      r.priority = Math.min(10, r.priority + (r.mistakes >= 3 ? 3 : 2));
+    }
+    save();
+    if (cleared && !silent) toast('“' + word(id).english + '” cleared from review');
+  }
+  function markKnow(id) {
+    const w = wordStats(id); touchDay(id); w.seen++; w.run++; w.last = Date.now();
+    const cleared = advanceReview(id); save();
+    if (cleared) toast('“' + word(id).english + '” cleared from review');
+  }
+  function markPractice(id) {
+    const w = wordStats(id); touchDay(id); w.seen++; w.run = 0; w.last = Date.now();
+    const r = ensureReview(id); r.flagged = true; r.level = 0; r.due = Date.now(); r.priority = Math.min(10, r.priority + 1);
+    save();
+  }
+
+  function wordStatus(id) {
+    if (state.review[id]) return 'review';
+    const w = state.words[id];
+    if (!w || !w.seen) return 'new';
+    return w.run >= MASTERED_RUN ? 'mastered' : 'learning';
+  }
+  const STATUS_CHIP = { new: ['New', ''], learning: ['Learning', 'chip-accent'], review: ['In review', 'chip-warn'], mastered: ['Mastered', 'chip-ok'] };
+  function metrics() {
+    let studied = 0, mastered = 0;
+    ALL_IDS.forEach(id => { const w = state.words[id]; if (w && w.seen) studied++; if (wordStatus(id) === 'mastered') mastered++; });
+    const answered = state.totals.correct + state.totals.wrong;
+    return { studied, mastered, accuracy: pct(state.totals.correct, answered), answered, streak: streak(), todayCount: (state.days[dayKey()] || { ids: [] }).ids.length, reviewCount: Object.keys(state.review).length, dueCount: reviewList().filter(r => r.isDue).length };
+  }
+  function streak() {
+    const d = new Date(); d.setHours(12, 0, 0, 0);
+    const active = k => state.days[k] && state.days[k].answered > 0;
+    if (!active(dayKey(d))) d.setDate(d.getDate() - 1);
+    let n = 0;
+    while (active(dayKey(d))) { n++; d.setDate(d.getDate() - 1); }
+    return n;
+  }
+  function reviewList() {
+    const now = Date.now();
+    return Object.entries(state.review).map(([k, r]) => ({ id: Number(k), ...r, isDue: r.due <= now }))
+      .filter(r => isValidId(r.id))
+      .sort((a, b) => (b.isDue - a.isDue) || (b.priority - a.priority) || (b.mistakes - a.mistakes) || (a.due - b.due));
+  }
+  function reviewStatus(r) {
+    if (r.level === 0) return r.mistakes >= 3 ? ['Struggling', 'chip-bad'] : (r.mistakes === 0 && r.flagged ? ['Flagged', 'chip-warn'] : ['Needs work', 'chip-warn']);
+    if (r.level >= REVIEW_STEPS - 1) return ['Almost cleared', 'chip-ok'];
+    return ['Reviewing ' + r.level + '/' + (REVIEW_STEPS - 1), 'chip-accent'];
+  }
+  function dueLabel(r) {
+    const ms = r.due - Date.now();
+    if (ms <= 0) return 'Due now';
+    if (ms < 3600e3) return 'In ' + Math.max(1, Math.round(ms / 60e3)) + ' min';
+    if (ms < 86400e3) return 'In ' + Math.round(ms / 3600e3) + ' h';
+    return 'In ' + Math.round(ms / 86400e3) + ' d';
+  }
+
+  /* =========================================================
+     5. SESSION ENGINE (shared by every mode)
+     ========================================================= */
+  const MODE_INFO = {
+    flashcards: { title: 'Flashcards', desc: 'Say if you know a word, then prove it by typing the translation.' },
+    learn: { title: 'Learn', desc: 'Read a Russian translation and choose the English expression.' },
+    write: { title: 'Write', desc: 'Type the English expression from memory.' },
+    match: { title: 'Match', desc: 'Pair English expressions with translations against the clock.' }
+  };
+
+  function pickDistractors(id, n, field) {
+    field = field || 'english';
+    const target = wordCount(word(id)[field]);
+    const candidates = shuffle(ALL_IDS.filter(o => o !== id && !conflicts(id, o)))
+      .sort((a, b) => Math.abs(wordCount(word(a)[field]) - target) - Math.abs(wordCount(word(b)[field]) - target));
+    return shuffle(candidates.slice(0, Math.max(n, 8))).slice(0, n);
+  }
+  function buildRounds(ids) {
+    const pool = ids.slice(), rounds = [];
+    let size = 4;
+    while (pool.length) {
+      const round = [];
+      for (let i = 0; i < pool.length && round.length < size;) {
+        if (round.some(r => conflicts(r, pool[i]))) { i++; continue; }
+        round.push(pool.splice(i, 1)[0]);
+      }
+      rounds.push(round);
+      size = Math.min(size + 1, 8);
+    }
+    // Fold a tiny last round into the previous one when no conflicts arise.
+    if (rounds.length > 1) {
+      const last = rounds[rounds.length - 1], prev = rounds[rounds.length - 2];
+      if (last.length < 3 && prev.length + last.length <= 10 && !last.some(a => prev.some(b => conflicts(a, b)))) {
+        prev.push(...last); rounds.pop();
+      }
+    }
+    return rounds;
+  }
+  function prepareRound(s) {
+    const cur = s.rounds[s.round];
+    s.left = shuffle(cur); s.right = shuffle(cur); s.matched = []; s.roundWrong = [];
+  }
+  function selectIds(source, count) {
+    if (source === 'difficult') return reviewList().map(r => r.id);
+    if (source === 'random') return shuffle(ALL_IDS).slice(0, Math.min(10, TOTAL));
+    if (source === 'custom') {
+      // Least practised first: unseen, then low streak, then oldest.
+      const ranked = shuffle(ALL_IDS).sort((a, b) => {
+        const wa = state.words[a] || { seen: 0, run: 0, last: 0 }, wb = state.words[b] || { seen: 0, run: 0, last: 0 };
+        return (Math.min(wa.seen, 1) - Math.min(wb.seen, 1)) || (wa.run - wb.run) || (wa.last - wb.last);
+      });
+      return ranked.slice(0, clampInt(count, 1, TOTAL));
+    }
+    return ALL_IDS.slice();
+  }
+  function startSession(mode, ids, opts) {
+    opts = opts || {};
+    ids = Array.from(new Set(ids.filter(isValidId)));
+    if (!ids.length) { toast('There are no words to study in that selection.'); return; }
+    const s = { mode, ids: opts.keepOrder ? ids : shuffle(ids), index: 0, results: {}, startedAt: Date.now(), updatedAt: Date.now(), source: opts.source || 'all', retry: !!opts.retry };
+    if (mode === 'match') { s.rounds = buildRounds(s.ids); s.round = 0; s.wrongIds = []; s.mistakes = 0; s.elapsed = 0; prepareRound(s); s.ids = s.rounds.flat(); }
+    state.sessions[mode] = s;
+    delete ui.completion[mode];
+    ui.flipped = false; ui.writeError = ''; ui.matchSel = { en: null, ru: null }; ui.matchTick = Date.now();
+    save();
+    go(mode, true);
+  }
+  function touch(s) { s.updatedAt = Date.now(); save(); }
+  function completeSession(mode) {
+    const s = state.sessions[mode]; if (!s) return;
+    if (mode === 'match') commitMatchTime(s);
+    const vals = s.ids.map(id => s.results[id]);
+    const summary = {
+      mode, total: s.ids.length, source: s.source, ids: s.ids.slice(),
+      correct: vals.filter(v => v === 'correct').length,
+      wrong: vals.filter(v => v === 'wrong').length,
+      skipped: vals.filter(v => v === 'skipped').length,
+      know: vals.filter(v => v === 'know').length,
+      practice: vals.filter(v => v === 'practice').length,
+      unanswered: vals.filter(v => v === undefined).length,
+      mistakeIds: s.ids.filter(id => s.results[id] === 'wrong' || s.results[id] === 'skipped'),
+      practiceIds: s.ids.filter(id => s.results[id] === 'practice')
+    };
+    if (mode === 'match') { summary.time = s.elapsed; summary.mistakes = s.mistakes; summary.mistakeIds = s.wrongIds.slice(); summary.rounds = s.rounds.length; }
+    delete state.sessions[mode];
+    state.totals.sessions++;
+    save();
+    ui.completion[mode] = summary;
+    render(true);
+    celebrate();
+    announce('Session complete.');
+  }
+
+  /* =========================================================
+     6. UI STATE + ICONS
+     ========================================================= */
+  const ui = { route: 'home', menuOpen: false, completion: {}, flipped: false, writeError: '', matchSel: { en: null, ru: null }, matchFlash: null, matchTick: Date.now(), progressFilter: 'all', setupError: '', timer: null, dialog: null, lastFocus: null };
+  const I = {
+    home: '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
+    cards: '<rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/>',
+    learn: '<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 5-5.5"/>',
+    write: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+    match: '<rect x="3" y="4" width="7" height="6" rx="1.5"/><rect x="14" y="14" width="7" height="6" rx="1.5"/><path d="M10 7h3a2 2 0 0 1 2 2v5"/>',
+    review: '<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/>',
+    progress: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    left: '<path d="m15 18-6-6 6-6"/>', right: '<path d="m9 18 6-6-6-6"/>',
+    shuffle: '<path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/>',
+    restart: '<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/>',
+    flip: '<path d="M7 7h11l-3-3"/><path d="M17 17H6l3 3"/>',
+    check: '<path d="m5 12.5 4.5 4.5L19 7"/>', x: '<path d="M6 6l12 12M18 6 6 18"/>',
+    flame: '<path d="M12 21c4 0 7-2.7 7-6.7 0-3.5-2.3-5.6-4-7.8-.6 1.8-1.6 2.8-2.8 3.2C12.5 6.5 11 4.4 9 3c.3 3-1.6 5-3 6.8C5 11 5 12.4 5 14.3 5 18.3 8 21 12 21z"/>',
+    target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+    book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
+    star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    test: '<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 3.5v2h6v-2"/><path d="m9 13 2 2 4-4.5"/>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>', arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    alert: '<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>'
+  };
+  const icon = (name, cls) => '<svg' + (cls ? ' class="' + cls + '"' : '') + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + I[name] + '</svg>';
+
+  const ROUTES = [
+    ['home', 'Home', 'home'], ['flashcards', 'Flashcards', 'cards'], ['learn', 'Learn', 'learn'], ['write', 'Write', 'write'],
+    ['match', 'Match', 'match'], ['test', 'Test', 'test'], ['review', 'Review', 'review'], ['progress', 'Progress', 'progress']
+  ];
+
+  /* =========================================================
+     7. RENDERING
+     ========================================================= */
+  const $main = document.getElementById('main');
+  const ru = text => '<span lang="ru">' + esc(text) + '</span>';
+
+  function renderNav() {
+    const rc = Object.keys(state.review).length;
+    const html = ROUTES.map(([r, label, ic]) =>
+      '<button type="button" class="nav-link" data-action="go" data-route="' + r + '"' + (ui.route === r ? ' aria-current="page"' : '') + '>' +
+      label + (r === 'review' && rc ? ' <span class="nav-badge num" aria-label="' + rc + ' words">' + rc + '</span>' : '') + '</button>').join('');
+    document.getElementById('nav-desktop').innerHTML = html;
+    const SHORT = { flashcards: 'Cards', progress: 'Stats' };
+    document.getElementById('nav-mobile').innerHTML = ROUTES.map(([r, label, ic]) =>
+      '<button type="button" class="tab" data-action="go" data-route="' + r + '" aria-label="' + label + '"' + (ui.route === r ? ' aria-current="page"' : '') + '>' + icon(ic) +
+      '<span aria-hidden="true">' + (SHORT[r] || label) + '</span>' + (r === 'review' && rc ? '<span class="tab-dot num" aria-hidden="true">' + rc + '</span>' : '') + '</button>').join('');
+  }
+  function applyPalette() {
+    const p = state.settings.palette, root = document.documentElement;
+    if (p && p !== 'purple') root.setAttribute('data-palette', p); else root.removeAttribute('data-palette');
+    const menu = document.getElementById('theme-menu');
+    if (menu) menu.innerHTML = PALETTES.map(([id, label, color]) => '<button type="button" class="theme-opt" role="menuitemradio" aria-checked="' + (state.settings.palette === id) + '" data-action="setPalette" data-palette="' + id + '"><span class="swatch lg" style="background:' + color + '"></span>' + label + (state.settings.palette === id ? icon('check', 'check') : '') + '</button>').join('');
+  }
+  function setThemeMenu(open) {
+    ui.themeOpen = open;
+    const menu = document.getElementById('theme-menu'), btn = document.getElementById('theme-btn');
+    if (!menu || !btn) return;
+    menu.hidden = !open; btn.setAttribute('aria-expanded', String(open));
+    if (open) { const cur = menu.querySelector('[aria-checked="true"]') || menu.querySelector('button'); if (cur) cur.focus({ preventScroll: true }); }
+  }
+  function renderFooter() {
+    document.getElementById('footer').innerHTML = Storage.available
+      ? '<p>Project for RGIIS · ' + plural(TOTAL, 'entry', 'entries') + ' · Innovation, invention and intellectual property. Progress is saved in this browser.</p>'
+      : '<p class="notice">Progress can’t be saved in this browser (storage is blocked). You can still study; your results will reset when the page closes.</p>';
+  }
+
+  function render(enter) {
+    if (ui.timer) { clearInterval(ui.timer); ui.timer = null; }
+    renderNav(); renderFooter();
+    const views = { home: viewHome, flashcards: () => viewMode('flashcards'), learn: () => viewMode('learn'), write: () => viewMode('write'), match: () => viewMode('match'), review: viewReview, progress: viewProgress, test: viewTest };
+    $main.innerHTML = '<div class="screen' + (enter ? ' enter' : '') + '">' + (views[ui.route] || viewHome)() + '</div>';
+    if (ui.route === 'match' && state.sessions.match && !ui.completion.match) {
+      ui.timer = setInterval(() => { const el = document.getElementById('match-time'); const s = state.sessions.match; if (el && s) el.textContent = fmtTime(matchElapsed(s)); }, 1000);
+    }
+    document.body.classList.toggle('test-active', testIsLive());
+    if (testIsLive()) ui.timer = setInterval(testTick, 250);
+  }
+
+  function pageHead(title, sub, right) {
+    return '<div class="page-head"><div><h1 id="page-title" tabindex="-1">' + esc(title) + '</h1>' + (sub ? '<p>' + sub + '</p>' : '') + '</div>' + (right || '') + '</div>';
+  }
+  function progressBar(value, max, label) {
+    const p = max > 0 ? Math.min(100, (value / max) * 100) : 0;
+    return '<div class="bar" role="progressbar" aria-label="' + esc(label) + '" aria-valuemin="0" aria-valuemax="' + max + '" aria-valuenow="' + value + '"><span class="fill" style="width:' + p.toFixed(1) + '%"></span></div>';
+  }
+  function emptyState(ic, title, text, actions) {
+    return '<div class="empty"><div class="empty-icon">' + icon(ic) + '</div><h3>' + esc(title) + '</h3><p>' + text + '</p>' + (actions ? '<div class="btn-row center">' + actions + '</div>' : '') + '</div>';
+  }
+  function wordRows(items, metaFn) {
+    return '<div class="rows">' + items.map(id => { const w = word(id); return '<div class="row"><div class="en">' + esc(w.english) + '</div><div class="ru">' + ru(w.russian) + '</div><div class="meta">' + (metaFn ? metaFn(id) : '') + '</div></div>'; }).join('') + '</div>';
+  }
+
+  /* ---- Continue Learning target ---- */
+  function continueTarget() {
+    if (state.test) return { kind: 'resume', mode: 'test', hint: 'Resume your test · task ' + (state.test.index + 1) + ' of ' + state.test.tasks.length };
+    const active = MODES.map(m => state.sessions[m]).filter(Boolean).sort((a, b) => b.updatedAt - a.updatedAt)[0];
+    if (active) {
+      const done = active.mode === 'match' ? active.rounds.slice(0, active.round).flat().length + active.matched.length : active.index;
+      return { kind: 'resume', mode: active.mode, hint: 'Resume your ' + MODE_INFO[active.mode].title + ' session · ' + done + ' of ' + active.ids.length + ' done' };
+    }
+    const due = reviewList().filter(r => r.isDue);
+    if (due.length) return { kind: 'review', hint: plural(due.length, 'word') + ' due for review. Start with a quick multiple-choice round.' };
+    const m = metrics();
+    if (!m.studied) return { kind: 'fresh', hint: 'Start with 10 flashcards to meet the vocabulary.' };
+    return { kind: 'next', hint: 'Practise 10 words you know least, in Learn mode.' };
+  }
+
+  function viewHome() {
+    const m = metrics(), target = continueTarget(), goal = state.settings.dailyGoal;
+    const reviews = reviewList().slice(0, 5);
+    const learning = m.studied - m.mastered;
+    const modeCard = (mode, ic) => {
+      const s = state.sessions[mode];
+      return '<button type="button" class="mode-card" data-action="go" data-route="' + mode + '"><span class="mode-icon">' + icon(ic) + '</span><h3>' + MODE_INFO[mode].title + '</h3><p>' + MODE_INFO[mode].desc + '</p>' +
+        (s ? '<span class="resume">In progress · ' + (mode === 'match' ? 'round ' + (s.round + 1) + ' of ' + s.rounds.length : (s.index + 1) + ' / ' + s.ids.length) + '</span>' : '') + '</button>';
+    };
+    return '' +
+      '<section class="hero"><div><p class="eyebrow">Innovation · Invention · Intellectual property</p><h1 id="page-title" tabindex="-1" style="margin-top:10px">Master Your Vocabulary</h1><p class="sub">Learn smarter. Remember longer.</p></div>' +
+      '<div class="hero-cta"><button type="button" class="btn btn-primary btn-lg" data-action="continue">Continue Learning ' + icon('arrow') + '</button><p class="hint">' + esc(target.hint) + '</p></div></section>' +
+      '<section class="stats" aria-label="Your statistics">' +
+        stat('book', 'Vocabulary entries', TOTAL) +
+        stat('star', 'Words mastered', m.mastered, '/ ' + TOTAL) +
+        stat('flame', 'Current streak', m.streak, m.streak === 1 ? 'day' : 'days') +
+        stat('target', goal ? 'Today’s goal' : 'Studied today', m.todayCount, goal ? '/ ' + goal : (m.todayCount === 1 ? 'word' : 'words')) +
+      '</section>' +
+      '<section class="panel panel-pad overall" aria-labelledby="overall-h"><div class="overall-top"><h2 id="overall-h" style="font-size:15px;font-weight:600">Overall progress</h2><span class="muted num">' + m.studied + ' of ' + TOTAL + ' studied · ' + pct(m.mastered, TOTAL) + '% mastered</span></div>' +
+        '<div class="bar" role="img" aria-label="' + m.mastered + ' mastered, ' + learning + ' in progress, ' + (TOTAL - m.studied) + ' not started"><span class="fill" style="width:' + (m.mastered / TOTAL * 100).toFixed(1) + '%"></span><span class="fill-2" style="width:' + (learning / TOTAL * 100).toFixed(1) + '%"></span></div>' +
+        '<div class="legend"><span><i style="background:var(--accent)"></i>Mastered ' + m.mastered + '</span><span><i class="lg-mid"></i>In progress ' + learning + '</span><span><i style="background:var(--surface-2)"></i>Not started ' + (TOTAL - m.studied) + '</span>' + (m.answered ? '<span>Accuracy ' + m.accuracy + '%</span>' : '') + '</div></section>' +
+      '<section class="section" aria-labelledby="modes-h"><div class="section-head"><h2 id="modes-h">Learning modes</h2></div><div class="modes">' +
+        modeCard('flashcards', 'cards') + modeCard('learn', 'learn') + modeCard('write', 'write') + modeCard('match', 'match') + testCard() + '</div></section>' +
+      '<section class="section" aria-labelledby="rev-h"><div class="section-head"><h2 id="rev-h">Words to Review</h2>' + (m.reviewCount ? '<button type="button" class="btn btn-ghost btn-sm" data-action="go" data-route="review">See all ' + m.reviewCount + '</button>' : '') + '</div>' +
+        '<div class="panel">' + (reviews.length ? wordRows(reviews.map(r => r.id), id => { const r = state.review[id]; return '<span class="chip ' + (r.due <= Date.now() ? 'chip-warn' : '') + '">' + dueLabel(r) + '</span>'; })
+          : emptyState('review', 'Nothing to review yet', 'Words you miss in Learn, Write or Match, and cards you mark “Need practice”, will appear here.')) + '</div></section>';
+  }
+  function testCard() {
+    const last = state.testHistory[0];
+    const sub = state.test ? 'Test in progress · task ' + (state.test.index + 1) + ' of ' + state.test.tasks.length
+      : last ? 'Last result: ' + last.percent + '% · ' + last.points + ' / 3 points' : 'True or False, matching, multiple choice and typing in one timed test.';
+    return '<button type="button" class="mode-card wide" data-action="go" data-route="test"><span class="mode-icon">' + icon('test') + '</span><span style="display:grid;gap:4px;min-width:0"><h3>Test</h3><p>' + esc(sub) + '</p></span><span class="go">' + icon('arrow') + '</span></button>';
+  }
+  function stat(ic, label, value, unit) {
+    return '<div class="stat"><span class="stat-label">' + icon(ic) + esc(label) + '</span><span class="stat-value">' + value + (unit ? ' <small>' + esc(unit) + '</small>' : '') + '</span></div>';
+  }
+
+  /* ---- Mode router: completion → active session → setup ---- */
+  function viewMode(mode) {
+    if (ui.completion[mode]) return viewCompletion(mode, ui.completion[mode]);
+    const s = state.sessions[mode];
+    if (s) return { flashcards: viewFlashcards, learn: viewLearn, write: viewWrite, match: viewMatch }[mode](s);
+    return viewSetup(mode);
+  }
+
+  function viewSetup(mode) {
+    const diffCount = Object.keys(state.review).length;
+    const choice = ui.setupChoice && ui.setupChoice[mode] || 'all';
+    const option = (value, title, count, desc, disabled) =>
+      '<label class="choice"><input type="radio" name="source" value="' + value + '"' + (choice === value && !disabled ? ' checked' : '') + (disabled ? ' disabled' : '') + '>' +
+      '<span class="choice-title">' + title + (count !== null ? '<span class="count">' + count + '</span>' : '') + '</span><span class="choice-desc">' + desc + '</span>' +
+      (value === 'custom' ? '<span class="custom-row"><label for="custom-count" class="small muted">Words</label><input class="input input-sm num" type="number" id="custom-count" name="count" min="1" max="' + TOTAL + '" step="1" inputmode="numeric" value="' + (ui.customCount || 15) + '"></span>' : '') + '</label>';
+    return pageHead(MODE_INFO[mode].title, esc(MODE_INFO[mode].desc)) +
+      '<form class="panel panel-pad" id="setup-form" data-mode="' + mode + '" novalidate style="display:grid;gap:20px">' +
+        '<fieldset class="choices"><legend>Choose what to study</legend>' +
+          option('all', 'All vocabulary', TOTAL, 'Every entry, shuffled.') +
+          option('difficult', 'Only difficult words', diffCount, diffCount ? 'Words in your review list, most troublesome first.' : 'No difficult words yet. Mistakes will appear here.', !diffCount) +
+          option('custom', 'Custom number', null, 'Pick how many; words you know least come first.') +
+          option('random', 'Random selection', Math.min(10, TOTAL), '10 random entries for a quick round.') +
+        '</fieldset>' +
+        (ui.setupError ? '<p class="error" role="alert">' + esc(ui.setupError) + '</p>' : '') +
+        '<div class="btn-row"><button type="submit" class="btn btn-primary btn-lg">Start ' + MODE_INFO[mode].title + ' ' + icon('arrow') + '</button></div>' +
+      '</form>';
+  }
+
+  function sessionTop(s, current, total, extraRight) {
+    return '<div class="stage-top"><div class="stage-meta"><span><strong class="num">' + current + '</strong> <span class="num">/ ' + total + '</span>' + (s.source === 'difficult' ? ' · Difficult words' : s.retry ? ' · Retrying mistakes' : '') + '</span>' +
+      '<span class="btn-row">' + (extraRight || '') + '<button type="button" class="btn btn-ghost btn-sm" data-action="endSession" data-mode="' + s.mode + '">End session</button></span></div>' +
+      progressBar(Math.min(current, total), total, 'Session progress') + '</div>';
+  }
+
+  /* ---- Flashcards ---- */
+  function fcCurrent(s) {
+    const id = s.ids[s.index];
+    if (!s.current || s.current.id !== id) s.current = { id, stage: 'front', value: '', outcome: null, close: false };
+    return s.current;
+  }
+  function viewFlashcards(s) {
+    const c = fcCurrent(s), id = c.id, w = word(id), done = c.stage === 'done';
+    const rated = Object.keys(s.results).length, last = s.index === s.ids.length - 1;
+    const no = '<span class="num">No. ' + String(id).padStart(2, '0') + '</span>';
+    const card = '<div class="flashcard' + (done ? ' flipped' : '') + '" id="flashcard" aria-live="polite">' +
+      '<span class="fc-inner"><span class="fc-face fc-front" aria-hidden="' + done + '"><span class="fc-label"><span>English</span>' + no + '</span><span class="fc-text">' + esc(w.english) + '</span><span class="fc-hint">' + (c.stage === 'typing' ? 'Type the Russian translation below' : 'Do you know the translation?') + '</span></span>' +
+      '<span class="fc-face fc-back" aria-hidden="' + !done + '"><span class="fc-label"><span>Russian</span>' + no + '</span><span class="fc-text" lang="ru">' + esc(w.russian) + '</span><span class="fc-hint">' + esc(w.english) + '</span></span></span></div>';
+    let below = '';
+    if (c.stage === 'front') {
+      below = '<div class="fc-rate"><button type="button" class="btn btn-lg btn-practice" data-action="fcPractice">' + icon('review') + 'Need Practice</button>' +
+        '<button type="button" class="btn btn-lg btn-know" data-action="fcKnow" id="fc-know">' + icon('check') + 'Know It</button></div>' +
+        '<p class="kbd-hint"><kbd>K</kbd> know it · <kbd>P</kbd> need practice</p>';
+    } else if (c.stage === 'typing') {
+      below = '<form class="fc-form" id="fc-form" novalidate autocomplete="off"><label for="fc-input" class="small muted" style="font-weight:550">Type the Russian translation</label>' +
+        '<input class="input" id="fc-input" type="text" lang="ru" placeholder="Перевод на русском…" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="120" value="' + esc(c.value) + '">' +
+        '<p class="error" id="fc-error" role="alert">' + esc(ui.fcError || '') + '</p>' +
+        '<div class="fc-rate"><button type="button" class="btn btn-lg btn-secondary" data-action="fcPractice">Show translation</button><button type="submit" class="btn btn-lg btn-primary">Check</button></div>' +
+        '<p class="small muted">For entries with several meanings, one is enough.</p></form>';
+    } else {
+      const fb = c.outcome === 'know'
+        ? '<div class="feedback ok" role="status">' + icon('check') + '<div class="fb-body"><span class="fb-title">Correct</span><span>You wrote: <span lang="ru">' + esc(c.value) + '</span></span></div></div>'
+        : c.outcome === 'wrong'
+          ? '<div class="feedback bad" role="status">' + icon('x') + '<div class="fb-body"><span class="fb-title">' + (c.close ? 'Very close. Check the spelling.' : 'Not quite') + '</span><span>You wrote: “<span lang="ru">' + esc(c.value) + '</span>”. The correct translation is on the card.</span><span class="small muted">Added to your review list.</span></div></div>'
+          : '<div class="feedback neutral" role="status">' + icon('review') + '<div class="fb-body"><span class="fb-title">Added to review</span><span>Read the translation on the card. You will practise this word again later.</span></div></div>';
+      below = fb + '<button type="button" class="btn btn-primary btn-lg" id="fc-next" data-action="fcNext" style="width:100%">' + (last ? 'Finish' : 'Next card') + ' ' + icon('arrow') + '</button>';
+    }
+    return '<div class="stage">' + sessionTop(s, s.index + 1, s.ids.length, '<span class="small num">' + rated + ' done</span>') + card + below + '</div>';
+  }
+
+  /* ---- Learn (multiple choice) ---- */
+  function learnCurrent(s) {
+    const id = s.ids[s.index];
+    if (!s.current || s.current.id !== id) { s.current = { id, options: shuffle([id].concat(pickDistractors(id, 3))), picked: null }; touch(s); }
+    return s.current;
+  }
+  function viewLearn(s) {
+    const c = learnCurrent(s), w = word(c.id), answered = c.picked !== null;
+    const opts = c.options.map((oid, i) => {
+      let cls = '', mark = '';
+      if (answered) {
+        if (oid === c.id) { cls = 'correct'; mark = icon('check'); }
+        else if (oid === c.picked) { cls = 'wrong'; mark = icon('x'); }
+        else cls = 'dim';
+      }
+      return '<button type="button" class="option ' + cls + '" data-action="learnPick" data-id="' + oid + '"' + (answered ? ' disabled' : '') + '><span class="key" aria-hidden="true">' + (i + 1) + '</span><span>' + esc(word(oid).english) + '</span><span class="mark">' + mark + (cls === 'correct' ? '<span class="sr-only">Correct answer</span>' : cls === 'wrong' ? '<span class="sr-only">Your answer</span>' : '') + '</span></button>';
+    }).join('');
+    let fb = '';
+    if (answered) {
+      const ok = c.picked === c.id;
+      fb = ok
+        ? '<div class="feedback ok" role="status">' + icon('check') + '<div class="fb-body"><span class="fb-title">Correct</span><span>“' + esc(w.english) + '” means ' + ru(w.russian) + '.</span></div></div>'
+        : '<div class="feedback bad" role="status">' + icon('x') + '<div class="fb-body"><span class="fb-title">Not quite</span><span>The answer is <strong>' + esc(w.english) + '</strong>. You chose “' + esc(word(c.picked).english) + '”, which means ' + ru(word(c.picked).russian) + '.</span></div></div>';
+      fb += '<div class="btn-row"><button type="button" class="btn btn-primary btn-lg" id="continue-btn" data-action="learnContinue" style="width:100%">Continue ' + icon('arrow') + '</button></div>';
+    }
+    const done = Object.keys(s.results).length, right = Object.values(s.results).filter(v => v === 'correct').length;
+    return '<div class="stage">' + sessionTop(s, s.index + 1, s.ids.length, '<span class="small num">' + right + ' / ' + done + ' correct</span>') +
+      '<div class="panel question"><p class="eyebrow">Choose the English expression</p><p class="q-text" lang="ru">' + esc(w.russian) + '</p></div>' +
+      '<div class="options" role="group" aria-label="Answer options">' + opts + '</div>' + fb +
+      (answered ? '' : '<p class="kbd-hint"><kbd>1</kbd>–<kbd>' + c.options.length + '</kbd> to choose · <kbd>Enter</kbd> to continue</p>') + '</div>';
+  }
+
+  /* ---- Write ---- */
+  function writeCurrent(s) {
+    const id = s.ids[s.index];
+    if (!s.current || s.current.id !== id) s.current = { id, attempt: null, retry: false };
+    return s.current;
+  }
+  function viewWrite(s) {
+    const c = writeCurrent(s), w = word(c.id), a = c.attempt;
+    let fb = '', inputCls = '';
+    if (a) {
+      inputCls = a.ok ? ' is-ok' : ' is-bad';
+      if (a.ok) fb = '<div class="feedback ok" role="status">' + icon('check') + '<div class="fb-body"><span class="fb-title">' + (c.retry ? 'Correct on retry' : 'Correct') + '</span><span>' + esc(w.english) + '</span></div></div>';
+      else if (a.revealed) fb = '<div class="feedback bad" role="status">' + icon('alert') + '<div class="fb-body"><span class="fb-title">Answer</span><span><strong>' + esc(w.english) + '</strong></span><span class="small muted">Added to your review list.</span></div></div>';
+      else fb = '<div class="feedback bad" role="status">' + icon('x') + '<div class="fb-body"><span class="fb-title">' + (a.close ? 'Very close. Check the spelling.' : 'Not quite') + '</span><span>Correct answer: <strong>' + esc(w.english) + '</strong></span><span class="small muted">You wrote: “' + esc(a.value) + '”</span></div></div>';
+    }
+    const actions = !a
+      ? '<button type="submit" class="btn btn-primary btn-lg">Check Answer</button><button type="button" class="btn btn-ghost btn-lg" data-action="writeShow">Show answer</button>'
+      : (a.ok || a.revealed
+        ? '<button type="button" class="btn btn-primary btn-lg" id="continue-btn" data-action="writeContinue">Continue ' + icon('arrow') + '</button>' + (a.revealed ? '<button type="button" class="btn btn-secondary btn-lg" data-action="writeRetry">Type it now</button>' : '')
+        : '<button type="button" class="btn btn-secondary btn-lg" id="retry-btn" data-action="writeRetry">' + icon('restart') + 'Try again</button><button type="button" class="btn btn-primary btn-lg" data-action="writeContinue">Continue ' + icon('arrow') + '</button>');
+    const done = Object.keys(s.results).length, right = Object.values(s.results).filter(v => v === 'correct').length;
+    return '<div class="stage">' + sessionTop(s, s.index + 1, s.ids.length, '<span class="small num">' + right + ' / ' + done + ' correct</span>') +
+      '<div class="panel question"><p class="eyebrow">Type the English expression</p><p class="q-text" lang="ru">' + esc(w.russian) + '</p><p class="small muted">' + plural(wordCount(w.english), 'word') + '</p></div>' +
+      '<form id="write-form" class="field" novalidate autocomplete="off"><label for="write-input">Your answer</label>' +
+        '<input class="input' + inputCls + '" id="write-input" name="answer" type="text" placeholder="Type the English expression…" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="120"' + (a ? ' readonly value="' + esc(a.value) + '"' : '') + ' aria-describedby="write-error">' +
+        '<p class="error" id="write-error" role="alert">' + esc(ui.writeError || '') + '</p>' + fb +
+        '<div class="btn-row">' + actions + '</div></form></div>';
+  }
+
+  /* ---- Match ---- */
+  function matchElapsed(s) { return s.elapsed + (Date.now() - ui.matchTick); }
+  function commitMatchTime(s) { s.elapsed = matchElapsed(s); ui.matchTick = Date.now(); }
+  function viewMatch(s) {
+    const cur = s.rounds[s.round], sel = ui.matchSel, flash = ui.matchFlash || {};
+    const tile = (side, id) => {
+      const matched = s.matched.includes(id), selected = sel[side] === id, flashing = flash[side] === id;
+      const text = side === 'en' ? esc(word(id).english) : ru(word(id).russian);
+      return '<button type="button" class="tile' + (matched ? ' matched' : '') + (flashing ? ' flash' : '') + '" data-action="matchPick" data-side="' + side + '" data-id="' + id + '" aria-pressed="' + selected + '"' + (matched ? ' disabled' : '') + '>' + text + (matched ? '<span class="sr-only"> (matched)</span>' : '') + '</button>';
+    };
+    const before = s.rounds.slice(0, s.round).flat().length;
+    return '<div class="stage" style="max-width:820px">' +
+      '<div class="stage-top"><div class="match-head"><span class="small muted">Round <strong class="num" style="color:var(--text)">' + (s.round + 1) + '</strong> of ' + s.rounds.length + ' · ' + plural(cur.length, 'pair') + '</span>' +
+      '<div class="match-stats"><span>' + icon('clock', '') .replace('<svg', '<svg style="width:15px;height:15px;vertical-align:-2px;margin-right:4px"') + '<b id="match-time">' + fmtTime(matchElapsed(s)) + '</b></span><span>Pairs <b>' + (before + s.matched.length) + '/' + s.ids.length + '</b></span><span>Mistakes <b>' + s.mistakes + '</b></span></div></div>' +
+      progressBar(before + s.matched.length, s.ids.length, 'Pairs matched') + '</div>' +
+      '<div class="match-grid"><div class="match-col" role="group" aria-labelledby="col-en"><h3 id="col-en">English</h3>' + s.left.map(id => tile('en', id)).join('') + '</div>' +
+      '<div class="match-col" role="group" aria-labelledby="col-ru"><h3 id="col-ru">Russian</h3>' + s.right.map(id => tile('ru', id)).join('') + '</div></div>' +
+      '<div class="btn-row center"><button type="button" class="btn btn-ghost btn-sm" data-action="matchRestart">' + icon('restart') + 'Restart</button><button type="button" class="btn btn-ghost btn-sm" data-action="endSession" data-mode="match">End session</button></div>' +
+      '<p class="kbd-hint">Select one item in each column. <kbd>Tab</kbd> to move, <kbd>Enter</kbd> to select.</p></div>';
+  }
+
+  /* ---- Completion ---- */
+  function viewCompletion(mode, sum) {
+    let statsHtml = '', title = 'Session complete', note = '', actions = '';
+    const box = (v, l) => '<div><b>' + v + '</b><span>' + l + '</span></div>';
+    if (mode === 'flashcards') {
+      const missed = sum.ids.filter(x => sum.practiceIds.includes(x) || sum.mistakeIds.includes(x));
+      statsHtml = box(sum.know, 'Knew it') + box(sum.wrong, 'Typed wrong') + box(sum.practice, 'Need practice');
+      note = missed.length ? plural(missed.length, 'word') + ' added to your review list.' : 'You knew every card.';
+      actions = (missed.length ? '<button type="button" class="btn btn-primary" data-action="studyIds" data-mode="flashcards" data-ids="' + missed.join(',') + '">' + icon('restart') + 'Study missed cards</button>' : '') +
+        '<button type="button" class="btn ' + (missed.length ? 'btn-secondary' : 'btn-primary') + '" data-action="studyIds" data-mode="flashcards" data-ids="' + sum.ids.join(',') + '">' + icon('restart') + 'Restart</button>' +
+        '<button type="button" class="btn btn-secondary" data-action="go" data-route="learn">Try Learn mode</button>';
+    } else if (mode === 'match') {
+      statsHtml = box(fmtTime(sum.time), 'Time') + box(sum.total, 'Pairs') + box(sum.mistakes, 'Mistakes');
+      note = sum.mistakes ? 'Words you mismatched were added to review.' : 'A clean board. No mismatches.';
+      actions = '<button type="button" class="btn btn-primary" data-action="studyIds" data-mode="match" data-ids="' + sum.ids.join(',') + '">' + icon('restart') + 'Play again</button>' +
+        '<button type="button" class="btn btn-secondary" data-action="newSetup" data-mode="match">New selection</button>';
+    } else {
+      const answered = sum.correct + sum.wrong + sum.skipped;
+      title = sum.wrong + sum.skipped === 0 ? 'Perfect score' : 'Session complete';
+      statsHtml = box(sum.correct + '/' + sum.total, 'Correct') + box(pct(sum.correct, answered) + '%', 'Accuracy') + box(sum.wrong + sum.skipped, 'Mistakes');
+      actions = (sum.mistakeIds.length ? '<button type="button" class="btn btn-primary" data-action="retryMistakes" data-mode="' + mode + '">' + icon('restart') + 'Retry ' + plural(sum.mistakeIds.length, 'mistake') + '</button>' : '') +
+        '<button type="button" class="btn ' + (sum.mistakeIds.length ? 'btn-secondary' : 'btn-primary') + '" data-action="newSetup" data-mode="' + mode + '">New session</button>';
+    }
+    actions += '<button type="button" class="btn btn-ghost" data-action="go" data-route="home">Home</button>';
+    const mistakes = (mode === 'learn' || mode === 'write' || mode === 'match') && sum.mistakeIds.length
+      ? '<div class="mistake-list section"><div class="section-head"><h2>Mistakes</h2><span class="small muted">Added to review</span></div><div class="panel">' + wordRows(sum.mistakeIds) + '</div></div>' : '';
+    return '<div class="stage"><div class="panel done"><div class="done-badge">' + icon('check') + '</div><div style="display:grid;gap:6px"><h2 id="page-title" tabindex="-1">' + title + '</h2><p class="muted">' + MODE_INFO[mode].title + (note ? ' · ' + esc(note) : '') + '</p></div>' +
+      '<div class="done-stats num">' + statsHtml + '</div><div class="btn-row center">' + actions + '</div></div>' + mistakes + '</div>';
+  }
+
+  /* ---- Review ---- */
+  function viewReview() {
+    const list = reviewList(), due = list.filter(r => r.isDue).length;
+    if (!list.length) return pageHead('Review', 'Your personal list of difficult words.') +
+      '<div class="panel">' + emptyState('check', 'Your review list is empty', 'Answer a question incorrectly, fail a typing challenge, or mark a flashcard “Need practice”, and the word will show up here with its own review schedule.', '<button type="button" class="btn btn-primary" data-action="go" data-route="learn">Start a Learn session</button>') + '</div>';
+    const rows = list.map(r => { const w = word(r.id), st = reviewStatus(r);
+      return '<tr><td class="en">' + esc(w.english) + '</td><td class="ru">' + ru(w.russian) + '</td><td class="num">' + r.mistakes + '</td><td><span class="chip ' + st[1] + '">' + st[0] + '</span></td><td><span class="chip' + (r.isDue ? ' chip-warn' : '') + '">' + dueLabel(r) + '</span></td></tr>'; }).join('');
+    return pageHead('Review', plural(list.length, 'word') + ' in review · ' + due + ' due now. Each word needs ' + REVIEW_STEPS + ' spaced correct answers to clear.') +
+      '<section class="panel panel-pad" style="display:grid;gap:14px" aria-labelledby="practice-h"><h2 id="practice-h" style="font-size:15px;font-weight:600">Practise these words</h2><p class="small muted">Sessions use your review words only, highest priority first.</p>' +
+        '<div class="btn-row"><button type="button" class="btn btn-primary" data-action="reviewPractice" data-mode="learn">' + icon('learn') + 'Multiple choice</button><button type="button" class="btn btn-secondary" data-action="reviewPractice" data-mode="write">' + icon('write') + 'Typing</button><button type="button" class="btn btn-secondary" data-action="reviewPractice" data-mode="flashcards">' + icon('cards') + 'Flashcards</button></div></section>' +
+      '<div class="panel table-wrap"><table><caption class="sr-only">Words in review</caption><thead><tr><th scope="col">English</th><th scope="col">Russian</th><th scope="col">Mistakes</th><th scope="col">Status</th><th scope="col">Next review</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
+  /* ---- Progress + Settings ---- */
+  function viewProgress() {
+    const m = metrics();
+    const days = [];
+    for (let i = 13; i >= 0; i--) { const d = new Date(); d.setHours(12, 0, 0, 0); d.setDate(d.getDate() - i); days.push(d); }
+    const counts = days.map(d => (state.days[dayKey(d)] || { answered: 0 }).answered);
+    const max = Math.max(1, ...counts);
+    const chart = days.map((d, i) => '<div class="chart-col"><div class="chart-bar-wrap"><div class="chart-bar' + (i === 13 ? ' today' : '') + (counts[i] ? '' : ' zero') + '" style="height:' + (counts[i] ? Math.max(6, counts[i] / max * 100) : 2) + '%" title="' + counts[i] + ' answers"></div></div><span class="chart-day">' + 'SMTWTFS'[d.getDay()] + '</span></div>').join('');
+    const filter = ui.progressFilter;
+    const counts2 = { all: TOTAL, new: 0, learning: 0, review: 0, mastered: 0 };
+    ALL_IDS.forEach(id => counts2[wordStatus(id)]++);
+    const filters = [['all', 'All'], ['new', 'New'], ['learning', 'Learning'], ['review', 'In review'], ['mastered', 'Mastered']].map(([k, l]) =>
+      '<button type="button" class="filter" data-action="setFilter" data-filter="' + k + '" aria-pressed="' + (filter === k) + '">' + l + ' <span class="num">' + counts2[k] + '</span></button>').join('');
+    const ids = ALL_IDS.filter(id => filter === 'all' || wordStatus(id) === filter);
+    const rows = ids.map(id => { const w = word(id), st = STATUS_CHIP[wordStatus(id)], ws = state.words[id], tot = ws ? ws.correct + ws.wrong : 0;
+      return '<tr><td class="id">' + String(id).padStart(2, '0') + '</td><td class="en">' + esc(w.english) + '</td><td class="ru">' + ru(w.russian) + '</td><td><span class="chip ' + st[1] + '">' + st[0] + '</span></td><td class="num">' + (tot ? pct(ws.correct, tot) + '%' : '–') + '</td></tr>'; }).join('');
+    const goalOpts = GOALS.map(g => '<option value="' + g + '"' + (state.settings.dailyGoal === g ? ' selected' : '') + '>' + (g ? g + ' words per day' : 'Off') + '</option>').join('');
+    const goal = state.settings.dailyGoal;
+    return pageHead('Progress', 'Everything here is calculated from your own study history.') +
+      '<section class="stats" aria-label="Summary">' + stat('book', 'Words studied', m.studied, '/ ' + TOTAL) + stat('star', 'Mastered', m.mastered) + stat('learn', 'Accuracy', m.answered ? m.accuracy + '%' : '–') + stat('flame', 'Streak', m.streak, m.streak === 1 ? 'day' : 'days') + '</section>' +
+      (goal ? '<section class="panel panel-pad overall"><div class="overall-top"><h2 style="font-size:15px;font-weight:600">Today’s goal</h2><span class="muted num">' + m.todayCount + ' of ' + goal + ' words' + (m.todayCount >= goal ? ' · Goal reached' : '') + '</span></div>' + progressBar(Math.min(m.todayCount, goal), goal, 'Daily goal') + '</section>' : '') +
+      '<section class="panel panel-pad" style="display:grid;gap:12px" aria-labelledby="act-h"><div class="section-head"><h2 id="act-h" style="font-size:15px;font-weight:600">Last 14 days</h2><span class="small muted num">' + counts.reduce((a, b) => a + b, 0) + ' answers · ' + state.totals.sessions + ' sessions completed</span></div><div class="chart" role="img" aria-label="Answers per day over the last 14 days: ' + counts.join(', ') + '">' + chart + '</div></section>' +
+      '<section class="section" aria-labelledby="words-h"><div class="section-head"><h2 id="words-h">All words</h2></div><div class="filters" role="group" aria-label="Filter words">' + filters + '</div>' +
+        '<div class="panel table-wrap">' + (ids.length ? '<table><caption class="sr-only">Vocabulary status</caption><thead><tr><th scope="col">#</th><th scope="col">English</th><th scope="col">Russian</th><th scope="col">Status</th><th scope="col">Accuracy</th></tr></thead><tbody>' + rows + '</tbody></table>' : emptyState('book', 'No words here yet', 'Words move into this group as you study.')) + '</div></section>' +
+      '<section class="section" id="settings" aria-labelledby="settings-h"><div class="section-head"><h2 id="settings-h">Settings</h2></div><div class="panel settings">' +
+        '<div class="setting"><div><h3><label for="goal-select">Daily goal</label></h3><p>Number of different words to practise each day.</p></div><select class="select" id="goal-select">' + goalOpts + '</select></div>' +
+        '<div class="setting"><div><h3>Reset progress</h3><p>Deletes statistics, streak, review list and saved sessions. Vocabulary stays.</p></div><button type="button" class="btn btn-secondary" data-action="resetProgress" style="color:var(--bad)">Reset all progress</button></div>' +
+      '</div></section>';
+  }
+
+  /* =========================================================
+     7b. TEST
+     ========================================================= */
+  const normRuAnswer = s => String(s).toLowerCase().replace(/ё/g, 'е').replace(/[.,!?;:«»"“”()]/g, ' ').replace(/\s+/g, ' ').trim();
+  const acceptedRu = id => { const r = word(id).russian; return Array.from(new Set([normRuAnswer(r)].concat(r.split(',').map(normRuAnswer)))).filter(Boolean); };
+  const testIsLive = () => ui.route === 'test' && !!state.test && !ui.testResult;
+
+  function makeTask(kind, id) {
+    const t = { kind, id };
+    if (kind === 'tf') {
+      const other = pickDistractors(id, 1, 'russian')[0];
+      t.shown = (Math.random() < 0.5 || !other) ? id : other; t.truth = t.shown === id;
+    } else if (kind === 'mc-en') t.options = shuffle([id].concat(pickDistractors(id, 3, 'english')));
+    else if (kind === 'mc-ru') t.options = shuffle([id].concat(pickDistractors(id, 3, 'russian')));
+    else if (kind === 'match') {
+      const ids = [id];
+      for (const o of shuffle(ALL_IDS)) { if (ids.length >= 4) break; if (!ids.includes(o) && !ids.some(x => conflicts(x, o))) ids.push(o); }
+      t.ids = ids; t.left = shuffle(ids); t.right = shuffle(ids); t.pairs = {};
+    }
+    return t;
+  }
+  function buildTasks(ids, type) {
+    let kinds = [];
+    if (type === 'combined') { while (kinds.length < ids.length) kinds = kinds.concat(shuffle(TASK_KINDS)); kinds = kinds.slice(0, ids.length); }
+    else kinds = ids.map(() => type);
+    return ids.map((id, i) => makeTask(kinds[i], id));
+  }
+  function timerDesc(c) { return c.timer === 'total' ? c.minutes + ' min for the test' : c.timer === 'per' ? c.seconds + ' s per task' : 'No time limit'; }
+  function startTest(cfg, ids) {
+    const now = Date.now();
+    const pool = shuffle(ids && ids.length ? ids : ALL_IDS).slice(0, cfg.count);
+    state.test = { config: cfg, tasks: buildTasks(pool, cfg.type), index: 0, answers: {}, startedAt: now,
+      deadline: cfg.timer === 'total' ? now + cfg.minutes * 60e3 : null, qDeadline: cfg.timer === 'per' ? now + cfg.seconds * 1e3 : null,
+      leaves: 0, sel: null, draft: '' };
+    ui.testResult = null; ui.shield = false; ui.tsel = { en: null, ru: null }; ui.tflash = null; ui.testError = '';
+    save();
+    if (ui.route === 'test') { render(true); window.scrollTo(0, 0); focusTest(); } else go('test', true);
+  }
+  function currentValue(T) {
+    const t = T.tasks[T.index];
+    if (t.kind === 'tf' || t.kind === 'mc-en' || t.kind === 'mc-ru') return T.sel;
+    if (t.kind === 'type-en' || t.kind === 'type-ru') { const el = document.getElementById('test-input'); return String(el ? el.value : T.draft || '').replace(/\s+/g, ' ').trim().slice(0, 120); }
+    return null;
+  }
+  function isUnanswered(t, value) {
+    if (t.kind === 'match') return !Object.keys(t.pairs).length;
+    return value === null || value === undefined || value === '';
+  }
+  const matchCorrect = t => t.ids.filter(x => t.pairs[x] === x).length;
+  function gradeTask(t, value) {
+    switch (t.kind) {
+      case 'tf': return value === t.truth ? 1 : 0;
+      case 'mc-en': case 'mc-ru': return value === t.id ? 1 : 0;
+      case 'type-en': return acceptedAnswers(t.id).includes(normalizeAnswer(value)) ? 1 : 0;
+      case 'type-ru': return acceptedRu(t.id).includes(normRuAnswer(value)) ? 1 : 0;
+      case 'match': return matchCorrect(t) / t.ids.length;
+    }
+    return 0;
+  }
+  function submitTask(timedOut) {
+    const T = state.test; if (!T) return;
+    const i = T.index, t = T.tasks[i];
+    if (T.answers[i]) return;
+    const value = currentValue(T), unanswered = isUnanswered(t, value);
+    const score = unanswered ? 0 : gradeTask(t, value);
+    T.answers[i] = { value: unanswered ? null : value, score, timedOut: !!timedOut, unanswered };
+    if (!unanswered) {
+      if (t.kind === 'match') t.ids.forEach(x => { if (t.pairs[x] !== undefined) recordAnswer(x, t.pairs[x] === x, true); });
+      else recordAnswer(t.id, score === 1, true);
+    }
+    save();
+  }
+  function advanceTest() {
+    const T = state.test; if (!T) return;
+    T.index++; T.sel = null; T.draft = ''; ui.tsel = { en: null, ru: null }; ui.tflash = null;
+    if (T.index >= T.tasks.length) { T.index = T.tasks.length - 1; finishTest('done'); return; }
+    if (T.config.timer === 'per') T.qDeadline = Date.now() + T.config.seconds * 1e3;
+    save(); render(); window.scrollTo(0, 0); focusTest();
+  }
+  function focusTest() {
+    const el = document.getElementById('test-input');
+    if (el && !el.readOnly) { el.focus({ preventScroll: true }); return; }
+    const f = document.querySelector('.test-body button:not(:disabled)'); if (f) f.focus({ preventScroll: true });
+  }
+  function finishTest(reason) {
+    const T = state.test; if (!T) return;
+    const now = Date.now(), n = T.tasks.length;
+    const results = T.tasks.map((t, i) => ({ t, a: T.answers[i] || { value: null, score: 0, unanswered: true, timedOut: reason === 'time' } }));
+    const ratio = n ? results.reduce((acc, r) => acc + r.a.score, 0) / n : 0;
+    const entry = { at: now, count: n, type: T.config.type, percent: Math.round(ratio * 100), points: Math.round(ratio * 30) / 10,
+      timeMs: Math.max(0, Math.min(now, T.deadline || now) - T.startedAt), timer: timerDesc(T.config), leaves: T.leaves, reason };
+    state.testHistory.unshift(entry); state.testHistory = state.testHistory.slice(0, 20);
+    state.totals.sessions++;
+    ui.testResult = { entry, results, config: T.config };
+    state.test = null; ui.shield = false; renderShield(); save();
+    render(true); window.scrollTo(0, 0); focusKeep('page-title');
+    announce('Test finished. Score ' + entry.percent + ' percent, ' + entry.points + ' of 3 points.');
+    if (ratio >= 0.5) celebrate();
+  }
+  function gradeLabel(points) { return points >= 2.5 ? ['Excellent', 'chip-ok'] : points >= 2 ? ['Good', 'chip-ok'] : points >= 1 ? ['Satisfactory', 'chip-warn'] : ['Not passed', 'chip-bad']; }
+  function testTimerState(T) {
+    const now = Date.now();
+    if (T.config.timer === 'total') { const left = T.deadline - now; return { txt: fmtTime(Math.ceil(Math.max(0, left) / 1000) * 1000), warn: left <= 60e3, left, label: 'Time left for the test' }; }
+    if (T.config.timer === 'per') { const left = T.qDeadline - now; return { txt: fmtTime(Math.ceil(Math.max(0, left) / 1000) * 1000), warn: left <= 10e3, left, label: 'Time left for this task' }; }
+    return { txt: fmtTime(now - T.startedAt), warn: false, left: Infinity, label: 'Time spent' };
+  }
+  function testTick() {
+    const T = state.test; if (!T || !testIsLive()) return;
+    const st = testTimerState(T);
+    if (st.left <= 0) {
+      if (T.config.timer === 'total') { submitTask(true); toast('Time is up'); finishTest('time'); return; }
+      if (!T.answers[T.index]) submitTask(true);
+      toast('Time is up for this task');
+      advanceTest(); return;
+    }
+    const el = document.getElementById('test-timer');
+    if (el) { el.querySelector('b').textContent = st.txt; el.classList.toggle('warn', st.warn); }
+  }
+  function shieldOn() { if (!testIsLive() || ui.shield) return; ui.shield = true; state.test.leaves++; save(); renderShield(); }
+  function renderShield() {
+    const root = document.getElementById('shield-root'); if (!root) return;
+    root.innerHTML = ui.shield ? '<div class="shield" role="dialog" aria-modal="true" aria-labelledby="shield-h"><div class="shield-box"><div class="empty-icon">' + icon('alert') + '</div><h2 id="shield-h">Test hidden</h2><p class="muted">You left the test or tried to capture the screen. The timer keeps running, and this exit is recorded in your results.</p><button type="button" class="btn btn-primary btn-lg" data-action="shieldOff">Return to the test</button></div></div>' : '';
+    if (ui.shield) { const b = root.querySelector('button'); if (b) b.focus(); }
+  }
+
+  function viewTest() {
+    if (ui.testResult) return viewTestResult(ui.testResult);
+    if (state.test) return viewTestRun(state.test);
+    return viewTestSetup();
+  }
+  function viewTestSetup() {
+    const c = state.settings.testConfig;
+    const radio = (name, value, checked, title, desc, extra, wide) => '<label class="choice' + (wide ? ' choice-wide' : '') + '"><input type="radio" name="' + name + '" value="' + value + '"' + (checked ? ' checked' : '') + '><span class="choice-title">' + title + '</span>' + (desc ? '<span class="choice-desc">' + desc + '</span>' : '') + (extra || '') + '</label>';
+    const types = TEST_TYPES.map(([v, t, d], i) => radio('t-type', v, c.type === v, esc(t) + (v === 'combined' ? '<span class="chip chip-accent">Recommended</span>' : ''), esc(d), '', i === 0)).join('');
+    const timers = radio('t-timer', 'off', c.timer === 'off', 'No timer', 'The clock only shows time spent.') +
+      radio('t-timer', 'total', c.timer === 'total', 'Whole test', 'One countdown for the entire test.', '<span class="custom-row"><input class="input input-sm num" type="number" id="t-minutes" min="1" max="180" step="1" inputmode="numeric" value="' + c.minutes + '"><label for="t-minutes" class="small muted">minutes</label></span>') +
+      radio('t-timer', 'per', c.timer === 'per', 'Each task', 'A separate countdown for every task.', '<span class="custom-row"><input class="input input-sm num" type="number" id="t-seconds" min="5" max="600" step="1" inputmode="numeric" value="' + c.seconds + '"><label for="t-seconds" class="small muted">seconds</label></span>');
+    const fbUnused = radio('t-feedback', 'end', c.feedback === 'end', 'At the end', 'Exam style: answers appear only in the results.') +
+      radio('t-feedback', 'each', c.feedback === 'each', 'After each task', 'Practice style: check every answer right away.');
+    const hist = state.testHistory.slice(0, 8);
+    const histRows = hist.map(e => { const g = gradeLabel(e.points), d = new Date(e.at);
+      return '<tr><td class="num">' + esc(d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })) + '</td><td>' + esc(testTypeName(e.type)) + '</td><td class="num">' + e.count + '</td><td class="num"><strong>' + e.percent + '%</strong></td><td class="num">' + e.points + ' / 3</td><td><span class="chip ' + g[1] + '">' + g[0] + '</span></td><td class="num">' + fmtTime(e.timeMs) + '</td></tr>'; }).join('');
+    return pageHead('Test', 'Check yourself under exam conditions. Scored in percent and on a 0–3 point scale.') +
+      '<form class="panel panel-pad" id="test-setup" novalidate style="display:grid;gap:24px">' +
+        '<div class="field"><label for="t-count">Number of tasks <span style="font-weight:400">(1–' + TOTAL + ')</span></label>' +
+          '<div class="count-row"><input type="range" id="t-count-range" min="1" max="' + TOTAL + '" step="1" value="' + c.count + '" aria-label="Number of tasks slider"><input class="input input-sm num" type="number" id="t-count" min="1" max="' + TOTAL + '" step="1" inputmode="numeric" value="' + c.count + '"></div>' +
+          '<div class="filters">' + [5, 10, 20, 30, TOTAL].map(n => '<button type="button" class="filter" data-action="testCount" data-n="' + n + '">' + (n === TOTAL ? 'All ' + n : n) + '</button>').join('') + '</div></div>' +
+        '<fieldset class="choices"><legend>Test type</legend>' + types + '</fieldset>' +
+        '<fieldset class="choices three"><legend>Timer</legend>' + timers + '</fieldset>' +
+        '<div class="protect-note">' + icon('alert') + '<p>Correct answers are shown only in the results. During the test, copying and text selection are off, and the test hides itself when you switch apps, leave the page or press a screenshot shortcut. Every exit is counted in your results.</p></div>' +
+        '<p class="error" id="test-error" role="alert"></p>' +
+        '<div class="btn-row"><button type="submit" class="btn btn-primary btn-lg">Start test ' + icon('arrow') + '</button></div></form>' +
+      '<section class="section" aria-labelledby="hist-h"><div class="section-head"><h2 id="hist-h">Recent results</h2></div><div class="panel' + (hist.length ? ' table-wrap' : '') + '">' +
+        (hist.length ? '<table><caption class="sr-only">Recent test results</caption><thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Tasks</th><th scope="col">Score</th><th scope="col">Points</th><th scope="col">Grade</th><th scope="col">Time</th></tr></thead><tbody>' + histRows + '</tbody></table>'
+          : emptyState('test', 'No tests yet', 'Your scores will be listed here after your first test.')) + '</div></section>';
+  }
+
+  function viewTestRun(T) {
+    const i = T.index, t = T.tasks[i], a = T.answers[i], n = T.tasks.length, each = T.config.feedback === 'each';
+    const showFb = !!a && each, sel = T.sel, w = word(t.id);
+    const optCls = (val, isCorrect) => showFb ? (isCorrect ? 'correct' : (sel === val ? 'wrong' : 'dim')) : (sel === val ? 'selected' : '');
+    let body = '';
+    if (t.kind === 'tf') {
+      const btn = (val, label, k) => { const cls = optCls(val, val === t.truth);
+        return '<button type="button" class="option ' + cls + '" data-action="testSel" data-val="' + val + '" aria-pressed="' + (sel === val) + '"' + (a ? ' disabled' : '') + '><span class="key" aria-hidden="true">' + k + '</span><span>' + label + '</span></button>'; };
+      body = '<div class="panel question"><p class="eyebrow">Is this translation correct?</p><p class="q-text">' + esc(w.english) + '</p><p class="tf-eq" aria-label="means">' + icon('arrow') + '</p><p class="q-text q-ru" lang="ru">' + esc(word(t.shown).russian) + '</p></div>' +
+        '<div class="tf-row" role="group" aria-label="Answer">' + btn(true, 'True', 'T') + btn(false, 'False', 'F') + '</div>';
+    } else if (t.kind === 'mc-en' || t.kind === 'mc-ru') {
+      const en = t.kind === 'mc-en';
+      body = '<div class="panel question"><p class="eyebrow">' + (en ? 'Choose the English expression' : 'Choose the Russian translation') + '</p><p class="q-text"' + (en ? ' lang="ru"' : '') + '>' + esc(en ? w.russian : w.english) + '</p></div>' +
+        '<div class="options" role="group" aria-label="Answer options">' + t.options.map((oid, k) => { const cls = optCls(oid, oid === t.id);
+          return '<button type="button" class="option ' + cls + '" data-action="testSel" data-id="' + oid + '" aria-pressed="' + (sel === oid) + '"' + (a ? ' disabled' : '') + '><span class="key" aria-hidden="true">' + (k + 1) + '</span><span>' + (en ? esc(word(oid).english) : ru(word(oid).russian)) + '</span><span class="mark">' + (cls === 'correct' ? icon('check') : cls === 'wrong' ? icon('x') : '') + '</span></button>'; }).join('') + '</div>';
+    } else if (t.kind === 'type-en' || t.kind === 'type-ru') {
+      const en = t.kind === 'type-en';
+      const val = a ? (a.value || '') : T.draft;
+      body = '<div class="panel question"><p class="eyebrow">' + (en ? 'Type the English expression' : 'Type the Russian translation') + '</p><p class="q-text"' + (en ? ' lang="ru"' : '') + '>' + esc(en ? w.russian : w.english) + '</p>' +
+        '<p class="small muted">' + (en ? plural(wordCount(w.english), 'word') : 'Russian keyboard · for entries with several meanings, one is enough') + '</p></div>' +
+        '<form id="test-type-form" class="field" novalidate autocomplete="off"><label for="test-input">Your answer</label>' +
+        '<input class="input' + (showFb ? (a.score === 1 ? ' is-ok' : ' is-bad') : '') + '" id="test-input" type="text"' + (en ? '' : ' lang="ru"') + ' placeholder="' + (en ? 'Type the English expression…' : 'Type the Russian translation…') + '" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="120" value="' + esc(val) + '"' + (a ? ' readonly' : '') + '></form>';
+    } else if (t.kind === 'match') {
+      const tsel = ui.tsel || { en: null, ru: null }, order = Object.keys(t.pairs).map(Number);
+      const ruOwner = {}; order.forEach(en => { ruOwner[t.pairs[en]] = en; });
+      const tile = (side, id) => {
+        const owner = side === 'en' ? (t.pairs[id] !== undefined ? id : null) : (ruOwner[id] !== undefined ? ruOwner[id] : null);
+        const num = owner === null ? 0 : order.indexOf(owner) + 1;
+        return '<button type="button" class="tile' + (num ? ' paired' : '') + '" data-action="testMatch" data-side="' + side + '" data-id="' + id + '" aria-pressed="' + (tsel[side] === id) + '"' + (a ? ' disabled' : '') + '>' +
+          (num ? '<span class="pair-no" aria-label="pair ' + num + '">' + num + '</span>' : '') + '<span class="tile-txt">' + (side === 'en' ? esc(word(id).english) : ru(word(id).russian)) + '</span></button>'; };
+      body = '<div class="panel question" style="padding:18px"><p class="eyebrow">Match the pairs</p><p class="small muted">Tap an English item, then its translation. Tap a paired item to undo. ' + order.length + ' of ' + t.ids.length + ' paired.</p></div>' +
+        '<div class="match-grid"><div class="match-col" role="group" aria-label="English"><h3>English</h3>' + t.left.map(id => tile('en', id)).join('') + '</div><div class="match-col" role="group" aria-label="Russian"><h3>Russian</h3>' + t.right.map(id => tile('ru', id)).join('') + '</div></div>';
+    }
+    let fb = '';
+    if (showFb) {
+      const ok = a.score === 1, part = a.score > 0 && a.score < 1;
+      const title = a.unanswered ? (a.timedOut ? 'Time is up' : 'Skipped') : ok ? 'Correct' : part ? 'Partly correct' : 'Not quite';
+      let detail;
+      if (t.kind === 'tf') detail = t.truth ? 'The translation is correct.' : 'The translation is wrong. <strong>' + esc(w.english) + '</strong> means ' + ru(w.russian) + '.';
+      else if (t.kind === 'mc-en' || t.kind === 'type-en') detail = 'Answer: <strong>' + esc(w.english) + '</strong>';
+      else if (t.kind === 'mc-ru' || t.kind === 'type-ru') detail = 'Answer: <strong>' + ru(w.russian) + '</strong>';
+      else detail = matchCorrect(t) + ' of ' + t.ids.length + ' pairs correct.';
+      fb = '<div class="feedback ' + (ok ? 'ok' : 'bad') + '" role="status">' + icon(ok ? 'check' : 'x') + '<div class="fb-body"><span class="fb-title">' + title + '</span><span>' + detail + '</span></div></div>';
+    }
+    const last = i === n - 1;
+    const hasSel = t.kind === 'tf' || t.kind.indexOf('mc') === 0 ? sel !== null : t.kind === 'match' ? Object.keys(t.pairs).length > 0 : true;
+    const label = a ? (last ? 'See results' : 'Next task') : each ? (hasSel ? 'Check' : 'Skip') : (hasSel ? (last ? 'Finish test' : 'Next') : 'Skip');
+    const ts = testTimerState(T);
+    return '<div class="stage" style="max-width:' + (t.kind === 'match' ? 820 : 680) + 'px"><div class="stage-top"><div class="test-top"><span class="left"><span class="small muted">Task <strong class="num" style="color:var(--text)">' + (i + 1) + '</strong> / ' + n + '</span><span class="chip chip-accent">' + TASK_LABEL[t.kind] + '</span></span>' +
+      '<span class="left"><span class="timer' + (ts.warn ? ' warn' : '') + '" id="test-timer" role="timer" aria-label="' + ts.label + '">' + icon('clock') + '<b>' + ts.txt + '</b></span><button type="button" class="btn btn-ghost btn-sm" data-action="testFinish">Finish</button></span></div>' +
+      progressBar(Object.keys(T.answers).length, n, 'Tasks answered') + '</div>' +
+      '<h1 class="sr-only" id="page-title" tabindex="-1">Test, task ' + (i + 1) + ' of ' + n + '</h1>' +
+      '<div class="test-body" style="display:grid;gap:14px">' + body + '</div>' + fb +
+      '<div class="btn-row"><button type="button" class="btn ' + (hasSel || a ? 'btn-primary' : 'btn-secondary') + ' btn-lg" id="test-next" data-action="testNext" style="width:100%">' + label + ' ' + icon('arrow') + '</button></div>' +
+      '<p class="kbd-hint">' + (t.kind === 'tf' ? '<kbd>T</kbd> true · <kbd>F</kbd> false · ' : t.kind.indexOf('mc') === 0 ? '<kbd>1</kbd>–<kbd>4</kbd> choose · ' : '') + '<kbd>Enter</kbd> next</p></div>';
+  }
+
+  function describeTask(t, a) {
+    const w = word(t.id), E = esc;
+    const none = '<span class="muted">' + (a.timedOut ? 'Time ran out' : 'No answer') + '</span>';
+    switch (t.kind) {
+      case 'tf': return { prompt: E(w.english) + ' → ' + ru(word(t.shown).russian), yours: a.value === true ? 'True' : a.value === false ? 'False' : none, correct: t.truth ? 'True' : 'False · ' + ru(w.russian) };
+      case 'mc-en': return { prompt: ru(w.russian), yours: isValidId(a.value) ? E(word(a.value).english) : none, correct: E(w.english) };
+      case 'mc-ru': return { prompt: E(w.english), yours: isValidId(a.value) ? ru(word(a.value).russian) : none, correct: ru(w.russian) };
+      case 'type-en': return { prompt: ru(w.russian), yours: a.value ? E(a.value) : none, correct: E(w.english) };
+      case 'type-ru': return { prompt: E(w.english), yours: a.value ? '<span lang="ru">' + E(a.value) + '</span>' : none, correct: ru(w.russian) };
+      default: { const bad = t.ids.filter(x => t.pairs[x] !== x);
+        return { prompt: t.ids.map(x => E(word(x).english)).join(', '), yours: a.unanswered ? none : matchCorrect(t) + ' of ' + t.ids.length + ' pairs correct' + (bad.length ? '<br><span class="small muted">' + bad.map(x => E(word(x).english) + ' → ' + (t.pairs[x] !== undefined ? ru(word(t.pairs[x]).russian) : 'not paired')).join('<br>') + '</span>' : ''),
+          correct: bad.length ? bad.map(x => E(word(x).english) + ' = ' + ru(word(x).russian)).join('<br>') : 'All pairs' }; }
+    }
+  }
+  function viewTestResult(r) {
+    const e = r.entry, g = gradeLabel(e.points);
+    const c = { correct: 0, partial: 0, wrong: 0, unanswered: 0 };
+    r.results.forEach(x => { if (x.a.unanswered) c.unanswered++; else if (x.a.score === 1) c.correct++; else if (x.a.score > 0) c.partial++; else c.wrong++; });
+    const box = (v, l) => '<div><b>' + v + '</b><span>' + l + '</span></div>';
+    const kinds = TASK_KINDS.filter(k => r.results.some(x => x.t.kind === k));
+    const breakdown = kinds.length > 1 ? '<section class="section"><div class="section-head"><h2>By task type</h2></div><div class="panel rows">' + kinds.map(k => {
+      const xs = r.results.filter(x => x.t.kind === k), sc = xs.reduce((a2, x) => a2 + x.a.score, 0), p = pct(sc, xs.length);
+      return '<div class="row" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto"><div class="en">' + TASK_LABEL[k] + '</div><div>' + progressBar(Math.round(sc * 10) / 10, xs.length, TASK_LABEL[k]) + '</div><div class="meta num"><span class="chip">' + p + '% · ' + (Math.round(sc * 10) / 10) + '/' + xs.length + '</span></div></div>'; }).join('') + '</div></section>' : '';
+    const rows = r.results.map((x, k) => { const d = describeTask(x.t, x.a), sc = x.a.score;
+      const chip = x.a.unanswered ? '<span class="chip">0</span>' : sc === 1 ? '<span class="chip chip-ok">1</span>' : sc > 0 ? '<span class="chip chip-warn">' + (Math.round(sc * 100) / 100) + '</span>' : '<span class="chip chip-bad">0</span>';
+      return '<tr><td class="id">' + (k + 1) + '</td><td class="small muted" style="min-width:110px">' + TASK_LABEL[x.t.kind] + '</td><td class="ans">' + d.prompt + '</td><td class="ans">' + d.yours + '</td><td class="ans">' + d.correct + '</td><td>' + chip + '</td></tr>'; }).join('');
+    const hasMistakes = r.results.some(x => x.a.score < 1);
+    const title = e.reason === 'time' ? 'Time is up' : 'Test complete';
+    return '<div class="stage" style="max-width:860px"><div class="panel done"><div class="done-badge">' + icon(e.reason === 'time' ? 'clock' : 'check') + '</div>' +
+      '<div style="display:grid;gap:6px"><h2 id="page-title" tabindex="-1">' + title + '</h2><p class="muted">' + esc(testTypeName(e.type)) + ' · ' + plural(e.count, 'task') + ' · ' + esc(e.timer) + '</p></div>' +
+      '<div class="score-row"><div class="score"><b>' + e.percent + '%</b><span>Score</span></div><div class="score"><b>' + e.points + ' <small>/ 3</small></b><span>Points</span></div></div>' +
+      '<span class="chip ' + g[1] + '" style="height:26px;font-size:13px;padding:0 12px">' + g[0] + '</span>' +
+      '<div class="done-stats num">' + box(c.correct, 'Correct') + box(c.partial, 'Partly correct') + box(c.wrong, 'Wrong') + box(c.unanswered, 'Unanswered') + box(fmtTime(e.timeMs), 'Time') + box(e.leaves, 'Left the test') + '</div>' +
+      '<div class="btn-row center">' + (hasMistakes ? '<button type="button" class="btn btn-primary" data-action="testRetryMistakes">' + icon('restart') + 'Retry mistakes</button>' : '') +
+        '<button type="button" class="btn ' + (hasMistakes ? 'btn-secondary' : 'btn-primary') + '" data-action="testRestart">New test, same settings</button>' +
+        '<button type="button" class="btn btn-secondary" data-action="testSetup">Change settings</button><button type="button" class="btn btn-ghost" data-action="go" data-route="home">Home</button></div>' +
+      '<p class="small muted">Points = score × 3. Excellent from 2.5, Good from 2, Satisfactory from 1.</p></div>' + breakdown +
+      '<section class="section"><div class="section-head"><h2>Answers</h2></div><div class="panel table-wrap"><table><caption class="sr-only">All answers</caption><thead><tr><th scope="col">#</th><th scope="col">Type</th><th scope="col">Task</th><th scope="col">Your answer</th><th scope="col">Correct answer</th><th scope="col">Score</th></tr></thead><tbody>' + rows + '</tbody></table></div></section></div>';
+  }
+
+  /* =========================================================
+     8. ACTIONS (one delegated listener, registered once)
+     ========================================================= */
+  function go(route, enter) {
+    if (!ROUTES.some(r => r[0] === route)) route = 'home';
+    const sm = state.sessions.match;
+    if (ui.route === 'match' && route !== 'match' && sm) { commitMatchTime(sm); save(); }
+    if (route === 'match') ui.matchTick = Date.now();
+    const changed = ui.route !== route;
+    ui.route = route; ui.menuOpen = false; ui.setupError = ''; ui.writeError = ''; ui.flipped = false; ui.matchSel = { en: null, ru: null };
+    // Leaving a finished session screen clears its summary.
+    if (changed) MODES.forEach(m => { if (m !== route) delete ui.completion[m]; });
+    if (changed && route !== 'test') ui.testResult = null;
+    if (changed) { ui.shield = false; renderShield(); ui.testError = ''; }
+    render(enter !== false);
+    window.scrollTo(0, 0);
+    focusAfterRender();
+  }
+  function focusAfterRender() {
+    const t = document.getElementById('write-input') && !document.getElementById('write-input').readOnly ? document.getElementById('write-input')
+      : document.getElementById('fc-know') || document.getElementById('page-title') || $main;
+    if (t) t.focus({ preventScroll: true });
+  }
+
+  function fcAdvance(s) {
+    ui.fcError = '';
+    if (s.index < s.ids.length - 1) { s.index++; s.current = null; touch(s); render(); window.scrollTo(0, 0); focusKeep('fc-know'); }
+    else completeSession('flashcards');
+  }
+  function focusKeep(id) { const el = document.getElementById(id); if (el) el.focus({ preventScroll: true }); }
+
+  const ACTIONS = {
+    go: el => go(el.dataset.route),
+    continue: () => {
+      const t = continueTarget();
+      if (t.kind === 'resume') go(t.mode);
+      else if (t.kind === 'review') startSession('learn', reviewList().filter(r => r.isDue).map(r => r.id).slice(0, 15), { source: 'difficult', keepOrder: true });
+      else if (t.kind === 'fresh') startSession('flashcards', selectIds('custom', 10), { source: 'custom' });
+      else startSession('learn', selectIds('custom', 10), { source: 'custom' });
+    },
+    endSession: el => {
+      const mode = el.dataset.mode;
+      openConfirm({ title: 'End this session?', body: 'Answers you already gave are kept in your statistics. The rest of this session will be discarded.', confirm: 'End session',
+        onConfirm: () => { delete state.sessions[mode]; save(); go(mode); } });
+    },
+    newSetup: el => { delete ui.completion[el.dataset.mode]; go(el.dataset.mode); },
+    retryMistakes: el => { const mode = el.dataset.mode, sum = ui.completion[mode]; if (sum) startSession(mode, sum.mistakeIds, { retry: true, source: 'retry' }); },
+    studyIds: el => startSession(el.dataset.mode, el.dataset.ids.split(',').map(Number), { source: 'custom' }),
+    reviewPractice: el => startSession(el.dataset.mode, reviewList().map(r => r.id), { source: 'difficult', keepOrder: true }),
+    setFilter: el => { ui.progressFilter = el.dataset.filter; render(); focusKeep('words-h'); document.querySelector('[data-filter="' + ui.progressFilter + '"]').focus(); },
+    resetProgress: () => openConfirm({ title: 'Reset all progress?', body: 'This permanently deletes your statistics, streak, review list and saved sessions. It cannot be undone.', confirm: 'Reset progress', danger: true,
+      onConfirm: () => { const goal = state.settings.dailyGoal, palette = state.settings.palette; state = defaultState(); state.settings.dailyGoal = goal; state.settings.palette = palette; Storage.clear(); save(); ui.completion = {}; go('home'); toast('Progress reset'); } }),
+
+    fcKnow: () => { const s = state.sessions.flashcards; if (!s) return; const c = fcCurrent(s); if (c.stage !== 'front') return; c.stage = 'typing'; ui.fcError = ''; touch(s); render(); focusKeep('fc-input'); },
+    fcPractice: () => { const s = state.sessions.flashcards; if (!s) return; const c = fcCurrent(s); if (c.stage === 'done') return;
+      const inp = document.getElementById('fc-input'); if (inp) c.value = inp.value;
+      c.stage = 'done'; c.outcome = 'practice'; s.results[c.id] = 'practice'; markPractice(c.id); ui.fcError = ''; touch(s); render(); focusKeep('fc-next'); },
+    fcNext: () => { const s = state.sessions.flashcards; if (!s) return; const c = fcCurrent(s); if (c.stage !== 'done') return; fcAdvance(s); },
+
+    learnPick: el => {
+      const s = state.sessions.learn; if (!s || !s.current || s.current.picked !== null) return;
+      const pick = Number(el.dataset.id); if (!s.current.options.includes(pick)) return;
+      const ok = pick === s.current.id;
+      s.current.picked = pick; s.results[s.current.id] = ok ? 'correct' : 'wrong';
+      recordAnswer(s.current.id, ok); touch(s); render();
+      announce(ok ? 'Correct.' : 'Incorrect. The answer is ' + word(s.current.id).english + '.');
+      focusKeep('continue-btn');
+    },
+    learnContinue: () => { const s = state.sessions.learn; if (!s || !s.current || s.current.picked === null) return; s.index++; s.current = null;
+      if (s.index >= s.ids.length) { s.index = s.ids.length - 1; completeSession('learn'); } else { touch(s); render(); focusKeep('page-title'); const first = document.querySelector('.option'); if (first) first.focus({ preventScroll: true }); } },
+
+    writeShow: () => { const s = state.sessions.write; if (!s) return; const c = writeCurrent(s); if (c.attempt) return;
+      s.results[c.id] = 'skipped'; recordAnswer(c.id, false); c.attempt = { value: '', ok: false, revealed: true }; ui.writeError = ''; touch(s); render(); focusKeep('continue-btn'); },
+    writeRetry: () => { const s = state.sessions.write; if (!s) return; const c = writeCurrent(s); c.attempt = null; c.retry = true; ui.writeError = ''; touch(s); render(); focusKeep('write-input'); },
+    writeContinue: () => { const s = state.sessions.write; if (!s || !s.current || !s.current.attempt) return; s.index++; s.current = null; ui.writeError = '';
+      if (s.index >= s.ids.length) { s.index = s.ids.length - 1; completeSession('write'); } else { touch(s); render(); focusKeep('write-input'); } },
+
+    matchPick: el => {
+      const s = state.sessions.match; if (!s) return;
+      const side = el.dataset.side, id = Number(el.dataset.id);
+      if (s.matched.includes(id) || !s.rounds[s.round].includes(id)) return;
+      ui.matchFlash = null;
+      ui.matchSel[side] = ui.matchSel[side] === id ? null : id;
+      const { en, ru: r } = ui.matchSel;
+      if (en !== null && r !== null) {
+        commitMatchTime(s);
+        if (en === r) {
+          s.matched.push(en);
+          s.results[en] = s.roundWrong.includes(en) ? 'wrong' : 'correct';
+          if (!s.roundWrong.includes(en)) recordAnswer(en, true);
+          announce('Matched: ' + word(en).english + '.');
+        } else {
+          s.mistakes++;
+          if (!s.roundWrong.includes(en)) { s.roundWrong.push(en); if (!s.wrongIds.includes(en)) s.wrongIds.push(en); recordAnswer(en, false); }
+          ui.matchFlash = { en, ru: r };
+          announce('Not a match.');
+          setTimeout(() => { if (ui.matchFlash && ui.matchFlash.en === en && ui.matchFlash.ru === r) { ui.matchFlash = null; if (ui.route === 'match') { const a = document.activeElement && document.activeElement.dataset; render(); restoreTileFocus(a); } } }, 650);
+        }
+        ui.matchSel = { en: null, ru: null };
+        touch(s);
+        if (s.matched.length === s.rounds[s.round].length) {
+          if (s.round < s.rounds.length - 1) { s.round++; prepareRound(s); touch(s); render(); toast('Round ' + (s.round + 1) + ' of ' + s.rounds.length + ' · ' + plural(s.rounds[s.round].length, 'pair')); const t = document.querySelector('.tile'); if (t) t.focus({ preventScroll: true }); return; }
+          completeSession('match'); return;
+        }
+      }
+      render();
+      restoreTileFocus(el.dataset);
+    },
+    matchRestart: () => { const s = state.sessions.match; if (!s) return; startSession('match', s.ids, { source: s.source }); toast('New board'); }
+  };
+  function testSelect(v) {
+    const T = state.test; if (!T || T.answers[T.index]) return;
+    T.sel = v; save(); render();
+    const el = document.querySelector('.test-body [aria-pressed="true"]'); if (el) el.focus({ preventScroll: true });
+  }
+  Object.assign(ACTIONS, {
+    toggleThemes: () => setThemeMenu(!ui.themeOpen),
+    setPalette: el => { const p = el.dataset.palette; if (!PALETTES.some(x => x[0] === p)) return; state.settings.palette = p; save(); applyPalette(); setThemeMenu(false); document.getElementById('theme-btn').focus(); toast('Theme: ' + PALETTES.find(x => x[0] === p)[1]); },
+    shieldOff: () => { ui.shield = false; renderShield(); focusTest(); },
+    testCount: el => { const n = clampInt(Number(el.dataset.n), 1, TOTAL); ['t-count', 't-count-range'].forEach(id => { const x = document.getElementById(id); if (x) x.value = n; }); },
+    testSel: el => { const T = state.test; if (!T) return; const t = T.tasks[T.index]; testSelect(t.kind === 'tf' ? el.dataset.val === 'true' : Number(el.dataset.id)); },
+    testNext: () => {
+      const T = state.test; if (!T || ui.shield) return;
+      const i = T.index;
+      if (T.answers[i]) { advanceTest(); return; }
+      submitTask(false);
+      if (T.config.feedback === 'each') { render(); focusKeep('test-next'); announce(T.answers[i].score === 1 ? 'Correct.' : 'Incorrect.'); }
+      else advanceTest();
+    },
+    testFinish: () => openConfirm({ title: 'Finish the test now?', body: 'Tasks you have not answered will score 0.', confirm: 'Finish test',
+      onConfirm: () => { const T = state.test; if (!T) return; if (!T.answers[T.index] && !isUnanswered(T.tasks[T.index], currentValue(T))) submitTask(false); finishTest('early'); } }),
+    testMatch: el => {
+      const T = state.test; if (!T || T.answers[T.index]) return;
+      const t = T.tasks[T.index]; if (t.kind !== 'match') return;
+      const side = el.dataset.side, id = Number(el.dataset.id); if (!t.ids.includes(id)) return;
+      ui.tsel = ui.tsel || { en: null, ru: null };
+      const unpair = (sd, x) => { if (sd === 'en') delete t.pairs[x]; else Object.keys(t.pairs).forEach(k => { if (t.pairs[k] === x) delete t.pairs[k]; }); };
+      const paired = side === 'en' ? t.pairs[id] !== undefined : Object.values(t.pairs).includes(id);
+      if (paired) { unpair(side, id); ui.tsel[side] = id; }
+      else ui.tsel[side] = ui.tsel[side] === id ? null : id;
+      if (ui.tsel.en !== null && ui.tsel.ru !== null) { unpair('en', ui.tsel.en); unpair('ru', ui.tsel.ru); t.pairs[ui.tsel.en] = ui.tsel.ru; ui.tsel = { en: null, ru: null }; announce('Paired.'); }
+      save(); render(); restoreTileFocus(el.dataset);
+    },
+    testRestart: () => { const r = ui.testResult; if (r) startTest(r.config); },
+    testRetryMistakes: () => { const r = ui.testResult; if (!r) return; const ids = Array.from(new Set(r.results.filter(x => x.a.score < 1).map(x => x.t.id))); if (ids.length) startTest(Object.assign({}, r.config, { count: ids.length }), ids); },
+    testSetup: () => { ui.testResult = null; render(true); window.scrollTo(0, 0); focusKeep('page-title'); }
+  });
+  function restoreTileFocus(d) {
+    if (!d || !d.side) return;
+    let t = document.querySelector('.tile[data-side="' + d.side + '"][data-id="' + d.id + '"]:not(:disabled)') || document.querySelector('.tile:not(:disabled)');
+    if (t) t.focus({ preventScroll: true });
+  }
+
+  // Hide the bottom tab bar while the on-screen keyboard is likely open.
+  const isTextField = el => el && el.matches && el.matches('input[type=text], input[type=number]');
+  document.addEventListener('focusin', e => { if (isTextField(e.target)) document.body.classList.add('typing'); });
+  document.addEventListener('focusout', () => setTimeout(() => { if (!isTextField(document.activeElement)) document.body.classList.remove('typing'); }, 50));
+
+  document.addEventListener('click', e => {
+    if (ui.themeOpen && !e.target.closest('.theme-wrap')) setThemeMenu(false);
+    const el = e.target.closest('[data-action]');
+    if (!el || el.disabled) return;
+    const fn = ACTIONS[el.dataset.action];
+    if (fn) { e.preventDefault(); fn(el, e); }
+  });
+
+  document.addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+    if (form.id === 'write-form') {
+      const s = state.sessions.write; if (!s) return;
+      const c = writeCurrent(s); if (c.attempt) return;
+      const input = document.getElementById('write-input');
+      const raw = input.value.replace(/\s+/g, ' ').trim();
+      if (!raw) { ui.writeError = 'Type the English expression first, or choose Show answer.'; document.getElementById('write-error').textContent = ui.writeError; input.focus(); return; }
+      const v = normalizeAnswer(raw), accepted = acceptedAnswers(c.id);
+      const ok = accepted.includes(v);
+      const close = !ok && accepted.some(a => a.length >= 5 && levenshtein(v, a) <= (a.length > 14 ? 2 : 1));
+      if (!c.retry) { s.results[c.id] = ok ? 'correct' : 'wrong'; recordAnswer(c.id, ok); }
+      c.attempt = { value: raw.slice(0, 120), ok, close };
+      ui.writeError = ''; touch(s); render();
+      announce(ok ? 'Correct.' : 'Incorrect. The answer is ' + word(c.id).english + '.');
+      focusKeep(ok ? 'continue-btn' : 'retry-btn');
+    } else if (form.id === 'fc-form') {
+      const s = state.sessions.flashcards; if (!s) return;
+      const c = fcCurrent(s); if (c.stage !== 'typing') return;
+      const input = document.getElementById('fc-input');
+      const raw = input.value.replace(/\s+/g, ' ').trim();
+      if (!raw) { ui.fcError = 'Type the translation first, or choose Show translation.'; document.getElementById('fc-error').textContent = ui.fcError; input.focus(); return; }
+      const v = normRuAnswer(raw), accepted = acceptedRu(c.id);
+      const ok = accepted.includes(v);
+      c.close = !ok && accepted.some(x => x.length >= 5 && levenshtein(v, x) <= (x.length > 14 ? 2 : 1));
+      c.value = raw.slice(0, 120); c.stage = 'done'; c.outcome = ok ? 'know' : 'wrong';
+      s.results[c.id] = ok ? 'know' : 'wrong'; recordAnswer(c.id, ok); ui.fcError = '';
+      touch(s); render(); announce(ok ? 'Correct.' : 'Incorrect. The translation is ' + word(c.id).russian + '.'); focusKeep('fc-next');
+    } else if (form.id === 'test-type-form') {
+      ACTIONS.testNext();
+    } else if (form.id === 'test-setup') {
+      const num = id => { const el = document.getElementById(id); const v = el ? el.value.trim() : ''; return /^\d+$/.test(v) ? Number(v) : NaN; };
+      const pick = name => (form.querySelector('input[name="' + name + '"]:checked') || {}).value;
+      const fail = (msg, focusId) => { const er = document.getElementById('test-error'); if (er) er.textContent = msg; const f = document.getElementById(focusId); if (f) f.focus(); };
+      const count = num('t-count'), timer = pick('t-timer') || 'off';
+      if (!(count >= 1 && count <= TOTAL)) return fail('Number of tasks must be a whole number from 1 to ' + TOTAL + '.', 't-count');
+      const prev = state.settings.testConfig;
+      let minutes = prev.minutes, seconds = prev.seconds;
+      if (timer === 'total') { minutes = num('t-minutes'); if (!(minutes >= 1 && minutes <= 180)) return fail('Set the test time from 1 to 180 minutes.', 't-minutes'); }
+      if (timer === 'per') { seconds = num('t-seconds'); if (!(seconds >= 5 && seconds <= 600)) return fail('Set the time per task from 5 to 600 seconds.', 't-seconds'); }
+      const cfg = sanitizeTestConfig({ count, type: pick('t-type'), timer, minutes, seconds, feedback: pick('t-feedback') });
+      state.settings.testConfig = cfg; save();
+      startTest(cfg);
+    } else if (form.id === 'setup-form') {
+      const mode = form.dataset.mode;
+      const src = (form.querySelector('input[name="source"]:checked') || {}).value || 'all';
+      let count = TOTAL;
+      if (src === 'custom') {
+        const raw = document.getElementById('custom-count').value.trim();
+        count = Number(raw);
+        if (!/^\d+$/.test(raw) || count < 1 || count > TOTAL) { ui.setupError = 'Enter a whole number from 1 to ' + TOTAL + '.'; render(); const ci = document.getElementById('custom-count'); if (ci) ci.focus(); return; }
+        ui.customCount = count;
+      }
+      if (src === 'difficult' && !Object.keys(state.review).length) { ui.setupError = 'There are no difficult words yet.'; render(); return; }
+      ui.setupError = '';
+      startSession(mode, selectIds(src, count), { source: src, keepOrder: src === 'difficult' });
+    }
+  });
+
+  document.addEventListener('change', e => {
+    const t = e.target;
+    if (t.name === 'source') { ui.setupChoice = ui.setupChoice || {}; ui.setupChoice[t.form.dataset.mode] = t.value; if (t.value === 'custom') { const ci = document.getElementById('custom-count'); if (ci) ci.focus(); } }
+    if (t.id === 'goal-select') { const g = Number(t.value); if (GOALS.includes(g)) { state.settings.dailyGoal = g; save(); render(); focusKeep('goal-select'); toast(g ? 'Daily goal: ' + g + ' words' : 'Daily goal turned off'); } }
+  });
+  document.addEventListener('input', e => {
+    const t = e.target;
+    if (t.id === 't-count-range') { const x = document.getElementById('t-count'); if (x) x.value = t.value; }
+    if (t.id === 't-count') { const n = Number(t.value); const x = document.getElementById('t-count-range'); if (x && Number.isInteger(n) && n >= 1 && n <= TOTAL) x.value = n; }
+    if (t.id === 'test-input' && state.test) state.test.draft = t.value.slice(0, 120);
+  });
+  document.addEventListener('focusin', e => {
+    const tid = e.target.id;
+    if (tid === 't-minutes' || tid === 't-seconds') { const r = document.querySelector('input[name="t-timer"][value="' + (tid === 't-minutes' ? 'total' : 'per') + '"]'); if (r) r.checked = true; }
+    if (e.target.id === 'custom-count') { const r = document.querySelector('input[name="source"][value="custom"]'); if (r && !r.checked) { r.checked = true; ui.setupChoice = ui.setupChoice || {}; ui.setupChoice[r.form.dataset.mode] = 'custom'; } }
+  });
+
+  /* Keyboard shortcuts */
+  document.addEventListener('keydown', e => {
+    if (ui.dialog) { handleDialogKeys(e); return; }
+    if (ui.themeOpen) {
+      if (e.key === 'Escape') { setThemeMenu(false); document.getElementById('theme-btn').focus(); return; }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const opts = Array.from(document.querySelectorAll('.theme-opt')); const i = opts.indexOf(document.activeElement); const n = opts[(i + (e.key === 'ArrowDown' ? 1 : -1) + opts.length) % opts.length]; if (n) n.focus(); return; }
+    }
+    if (testIsLive()) {
+      const k = (e.key || '').toLowerCase();
+      // Screenshot / print / copy shortcuts hide the test.
+      if (e.key === 'PrintScreen' || ((e.metaKey || e.ctrlKey) && e.shiftKey && ['3', '4', '5', '6', 's'].includes(k)) || ((e.metaKey || e.ctrlKey) && ['p', 's', 'c', 'x'].includes(k) && e.target.tagName !== 'INPUT')) {
+        e.preventDefault(); shieldOn(); try { navigator.clipboard && navigator.clipboard.writeText(' ').catch(() => {}); } catch (err) { /* ignore */ }
+        return;
+      }
+    }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    const onButton = tag === 'BUTTON' || e.target.getAttribute('role') === 'button';
+    const key = e.key;
+    if (ui.route === 'flashcards' && state.sessions.flashcards && !ui.completion.flashcards) {
+      const c = fcCurrent(state.sessions.flashcards);
+      if (c.stage === 'front') { if (key === 'k' || key === 'K') { e.preventDefault(); ACTIONS.fcKnow(); return; } if (key === 'p' || key === 'P') { ACTIONS.fcPractice(); return; } }
+      if (c.stage === 'done' && key === 'Enter' && !onButton) { e.preventDefault(); ACTIONS.fcNext(); return; }
+    }
+    if (testIsLive() && !ui.shield) {
+      const T = state.test, t = T.tasks[T.index], a = T.answers[T.index];
+      if (!a && t.kind === 'tf') { if (key === 't' || key === 'T' || key === '1') { testSelect(true); return; } if (key === 'f' || key === 'F' || key === '2') { testSelect(false); return; } }
+      if (!a && (t.kind === 'mc-en' || t.kind === 'mc-ru') && /^[1-9]$/.test(key)) { const n = Number(key); if (n <= t.options.length) testSelect(t.options[n - 1]); return; }
+      if (key === 'Enter' && !onButton) { e.preventDefault(); ACTIONS.testNext(); return; }
+    }
+    if (ui.route === 'learn' && state.sessions.learn && !ui.completion.learn) {
+      const c = state.sessions.learn.current;
+      if (c && c.picked === null && /^[1-9]$/.test(key)) { const n = Number(key); if (n <= c.options.length) { e.preventDefault(); ACTIONS.learnPick({ dataset: { id: String(c.options[n - 1]) } }); } return; }
+      if (c && c.picked !== null && key === 'Enter' && !onButton) { e.preventDefault(); ACTIONS.learnContinue(); }
+    }
+  });
+
+  /* =========================================================
+     9. DIALOG, TOASTS, ANNOUNCER, CELEBRATION
+     ========================================================= */
+  function openConfirm(opts) {
+    ui.lastFocus = document.activeElement;
+    ui.dialog = opts;
+    const root = document.getElementById('dialog-root');
+    root.innerHTML = '<div class="overlay" data-dialog-overlay><div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="dlg-title" aria-describedby="dlg-body"><h2 id="dlg-title">' + esc(opts.title) + '</h2><p id="dlg-body">' + esc(opts.body) + '</p>' +
+      '<div class="btn-row"><button type="button" class="btn btn-secondary" id="dlg-cancel">Cancel</button><button type="button" class="btn ' + (opts.danger ? 'btn-danger' : 'btn-primary') + '" id="dlg-ok">' + esc(opts.confirm) + '</button></div></div></div>';
+    document.getElementById('dlg-cancel').addEventListener('click', closeDialog);
+    document.getElementById('dlg-ok').addEventListener('click', () => { const fn = ui.dialog && ui.dialog.onConfirm; closeDialog(true); if (fn) fn(); });
+    root.querySelector('[data-dialog-overlay]').addEventListener('click', e => { if (e.target.hasAttribute('data-dialog-overlay')) closeDialog(); });
+    document.getElementById('dlg-cancel').focus();
+  }
+  function closeDialog(skipFocus) {
+    ui.dialog = null;
+    document.getElementById('dialog-root').innerHTML = '';
+    if (skipFocus !== true && ui.lastFocus && document.contains(ui.lastFocus)) ui.lastFocus.focus();
+  }
+  function handleDialogKeys(e) {
+    if (e.key === 'Escape') { e.preventDefault(); closeDialog(); return; }
+    if (e.key === 'Tab') {
+      const f = Array.from(document.querySelectorAll('#dialog-root button'));
+      const i = f.indexOf(document.activeElement);
+      e.preventDefault();
+      f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+    }
+  }
+  function toast(msg) {
+    const box = document.getElementById('toasts');
+    const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg;
+    box.appendChild(t);
+    while (box.children.length > 3) box.removeChild(box.firstChild);
+    setTimeout(() => t.remove(), 2400);
+  }
+  function announce(msg) { const a = document.getElementById('announcer'); a.textContent = ''; setTimeout(() => { a.textContent = msg; }, 30); }
+  function celebrate() {
+    if (reducedMotion()) return;
+    const c = document.createElement('div'); c.className = 'confetti'; c.setAttribute('aria-hidden', 'true');
+    const colors = ['var(--accent)', 'var(--ok)', 'var(--warn)', 'var(--accent-ink)'];
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('i');
+      const ang = Math.random() * Math.PI * 2, dist = 80 + Math.random() * 140;
+      p.style.setProperty('--x', Math.cos(ang) * dist + 'px');
+      p.style.setProperty('--y', Math.sin(ang) * dist * 0.8 + 60 + 'px');
+      p.style.setProperty('--r', (Math.random() * 540 - 270) + 'deg');
+      p.style.background = colors[i % colors.length];
+      p.style.animationDelay = (Math.random() * 80) + 'ms';
+      c.appendChild(p);
+    }
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 1400);
+  }
+
+  // Save match clock when the page is hidden or closed.
+  const flushTime = () => { const s = state.sessions.match; if (s && ui.route === 'match') { commitMatchTime(s); save(); } };
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { flushTime(); shieldOn(); } else ui.matchTick = Date.now(); });
+  window.addEventListener('blur', () => shieldOn());
+  document.addEventListener('keyup', e => { if (e.key === 'PrintScreen' && testIsLive()) { shieldOn(); try { navigator.clipboard && navigator.clipboard.writeText(' ').catch(() => {}); } catch (err) { /* ignore */ } } });
+  ['copy', 'cut', 'contextmenu', 'dragstart'].forEach(type => document.addEventListener(type, e => { if (testIsLive() && !(e.target.tagName === 'INPUT' && type !== 'contextmenu')) e.preventDefault(); }));
+  window.addEventListener('beforeprint', () => shieldOn());
+  window.addEventListener('pagehide', flushTime);
+
+  // Self-check of the dataset at startup (logged, never blocks the app).
+  (function verify() {
+    const ids = new Set(ALL_IDS);
+    if (ids.size !== TOTAL || vocabulary.some(v => !v.english || !v.russian)) console.error('Vocabulary data is invalid.');
+  })();
+
+  // Expose a read-only hook for automated checks.
+  window.__vocabApp = { vocabulary, conflicts, pickDistractors, buildRounds, normalizeAnswer, acceptedAnswers, getState: () => state, sanitize };
+
+  applyPalette();
+  render(true);
+})();
+</script>
+
+</body>
+</html>
