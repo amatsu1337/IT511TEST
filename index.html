@@ -74,18 +74,35 @@
 :root[data-palette="forest"] { --bg: #F3F6F2; --surface: #FFFFFF; --surface-2: #E9EFE7; --border: #DCE4D9; --border-strong: #C6D2C2; --text: #17221A; --muted: #55635A; --faint: #838F85; --accent: #2F6B45; --accent-hover: #24563A; --accent-ink: #2A6140; --accent-soft: #E3EFE6; }
 :root[data-palette="sand"] { --bg: #F7F4EE; --surface: #FFFDF9; --surface-2: #EFE9DE; --border: #E5DDCF; --border-strong: #D3C8B6; --text: #26211A; --muted: #655C4F; --faint: #928878; --accent: #9A6A2F; --accent-hover: #82581F; --accent-ink: #80561F; --accent-soft: #F3E8D6; }
 :root[data-palette="midnight"] { --bg: #0E0F14; --surface: #171922; --surface-2: #1F2230; --border: #2A2E3D; --border-strong: #3A3F52; --text: #E9EAF2; --muted: #A2A6B8; --faint: #7A7E92; --accent: #8A90FF; --accent-hover: #9CA1FF; --accent-ink: #AEB2FF; --accent-soft: #232742; --on-accent: #0B0C12; --ok: #5BD38A; --ok-soft: #14291D; --ok-line: #2C6B45; --bad: #FF8A80; --bad-soft: #321A1A; --bad-line: #7A3530; --warn: #F2B65A; --warn-soft: #2E2414; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25); --shadow-lg: 0 2px 4px rgba(0,0,0,.3), 0 16px 40px rgba(0,0,0,.4); color-scheme: dark; }
-:root[data-palette="midnight"] .btn-danger { color: #1a0d0c; }
+:root[data-palette="midnight"], :root[data-palette="graphite"], :root[data-palette="emerald-night"], :root[data-palette="ruby-night"], :root[data-palette="deep-ocean"], :root[data-palette="amethyst"], :root[data-palette="amber-night"] { --ok: #5BD38A; --ok-soft: #14291D; --ok-line: #2C6B45; --bad: #FF8A80; --bad-soft: #321A1A; --bad-line: #7A3530; --warn: #F2B65A; --warn-soft: #2E2414; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25); --shadow-lg: 0 2px 4px rgba(0,0,0,.35), 0 16px 40px rgba(0,0,0,.45); color-scheme: dark; }
+:root[data-palette="graphite"] { --bg: #121214; --surface: #1A1A1D; --surface-2: #232327; --border: #2E2E33; --border-strong: #3F3F46; --text: #EDEDF0; --muted: #A7A7B0; --faint: #7C7C86; --accent: #E4E4E7; --accent-hover: #FFFFFF; --accent-ink: #F4F4F5; --accent-soft: #2A2A2F; --on-accent: #111113; }
+:root[data-palette="emerald-night"] { --bg: #0C1411; --surface: #121C18; --surface-2: #18251F; --border: #22332B; --border-strong: #2F463B; --text: #E6F0EA; --muted: #9DB3A6; --faint: #6F877A; --accent: #34D399; --accent-hover: #4ADEAA; --accent-ink: #6EE7B7; --accent-soft: #15302A; --on-accent: #06281C; }
+:root[data-palette="ruby-night"] { --bg: #150E10; --surface: #1E1416; --surface-2: #281B1E; --border: #362328; --border-strong: #4A2F36; --text: #F3E8EA; --muted: #BBA0A6; --faint: #8C737A; --accent: #F0506E; --accent-hover: #F56A84; --accent-ink: #FF8FA3; --accent-soft: #3A1A22; --on-accent: #23070D; }
+:root[data-palette="deep-ocean"] { --bg: #0B1220; --surface: #111A2B; --surface-2: #172338; --border: #20304A; --border-strong: #2C4163; --text: #E6EEF9; --muted: #9CB0CC; --faint: #6C809E; --accent: #38BDF8; --accent-hover: #5CCBFA; --accent-ink: #7DD3FC; --accent-soft: #0F2A40; --on-accent: #04202F; }
+:root[data-palette="amethyst"] { --bg: #130F1A; --surface: #1B1524; --surface-2: #241C30; --border: #312640; --border-strong: #433456; --text: #EFE9F7; --muted: #B2A5C6; --faint: #84779A; --accent: #C084FC; --accent-hover: #CF9CFD; --accent-ink: #D8B4FE; --accent-soft: #2E1F45; --on-accent: #1F0B33; }
+:root[data-palette="amber-night"] { --bg: #14110B; --surface: #1C1810; --surface-2: #262016; --border: #342C1E; --border-strong: #473D2A; --text: #F4EEE2; --muted: #BDB19A; --faint: #8C826E; --accent: #FBBF24; --accent-hover: #FCCB4A; --accent-ink: #FCD34D; --accent-soft: #3A2E12; --on-accent: #2A1F02; }
 :root[data-palette] .btn-danger { color: #fff; }
-:root[data-palette="midnight"] .btn-danger { color: #1a0d0c; }
-.theme-wrap { position: relative; display: flex; align-items: center; }
-.theme-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--surface); display: grid; place-items: center; cursor: pointer; padding: 0; }
-.theme-dot, .swatch { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); display: inline-block; flex: none; }
-.theme-menu { position: absolute; top: calc(100% + 8px); right: -8px; z-index: 40; width: 220px; max-width: calc(100vw - 32px); padding: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-lg); display: grid; gap: 2px; }
-.theme-menu[hidden] { display: none; }
+:root[data-palette="midnight"] .btn-danger, :root[data-palette="graphite"] .btn-danger, :root[data-palette="emerald-night"] .btn-danger, :root[data-palette="ruby-night"] .btn-danger, :root[data-palette="deep-ocean"] .btn-danger, :root[data-palette="amethyst"] .btn-danger, :root[data-palette="amber-night"] .btn-danger { color: #1a0d0c; }
+.theme-wrap { position: relative; display: flex; align-items: center; flex: none; }
+.theme-btn { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--accent-ink); display: grid; place-items: center; cursor: pointer; padding: 0; transition: background .2s, border-color .2s, transform .2s; }
+.theme-btn svg { width: 19px; height: 19px; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.theme-btn[aria-expanded="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.theme-btn[aria-expanded="true"] svg { transform: rotate(-35deg) scale(1.08); }
+.swatch { width: 20px; height: 20px; border-radius: 50%; display: inline-block; flex: none; box-shadow: inset 0 0 0 1px rgba(127,127,127,.35); }
+.theme-menu { position: absolute; top: calc(100% + 8px); left: 0; z-index: 40; width: 236px; max-width: calc(100vw - 32px); max-height: min(70vh, 560px); overflow-y: auto; overscroll-behavior: contain; padding: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow-lg); display: grid; gap: 2px;
+  opacity: 0; visibility: hidden; transform: translateY(-8px) scale(.97); transform-origin: top left; transition: opacity .22s ease, transform .26s cubic-bezier(.2,.8,.2,1), visibility 0s linear .26s; }
+.theme-menu.open { opacity: 1; visibility: visible; transform: none; transition: opacity .22s ease, transform .26s cubic-bezier(.2,.8,.2,1), visibility 0s; }
+.theme-group { padding: 8px 10px 4px; font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--faint); }
 .theme-opt { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 40px; padding: 0 10px; border: 0; border-radius: 9px; background: none; text-align: left; font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; }
 .theme-opt[aria-checked="true"] { background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
 .theme-opt .check { margin-left: auto; width: 16px; height: 16px; }
-.swatch.lg { width: 20px; height: 20px; }
+.name-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 520px) { .name-row { grid-template-columns: 1fr; } }
+.name-fields { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+.name-fields legend { padding: 0; margin-bottom: 10px; font-size: 13px; font-weight: 550; color: var(--muted); }
+.student { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 550; color: var(--muted); min-width: 0; }
+.student svg { width: 15px; height: 15px; flex: none; }
+.student span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 * { box-sizing: border-box; }
 body {
@@ -108,8 +125,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .wrap { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .header-row { display: flex; align-items: center; gap: 16px; height: 56px; }
 .brand-name { overflow: hidden; text-overflow: ellipsis; }
-.brand { min-width: 0; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; background: none; border: 0; padding: 4px 0; cursor: pointer; white-space: nowrap; }
-.brand-mark { width: 26px; height: 26px; border-radius: 7px; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-size: 13px; font-weight: 700; letter-spacing: -0.02em; }
+.brand { min-width: 0; display: flex; font-size: 16px !important; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; background: none; border: 0; padding: 4px 0; cursor: pointer; white-space: nowrap; }
+.brand-mark { display: none !important;  width: 26px; height: 26px; border-radius: 7px; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-size: 13px; font-weight: 700; letter-spacing: -0.02em; }
 .nav-links { display: flex; gap: 2px; margin-left: auto; }
 .nav-link { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px; border-radius: var(--r-sm); border: 0; background: none; color: var(--muted); font-size: 14px; font-weight: 500; cursor: pointer; transition: background .15s, color .15s; }
 @media (hover: hover) { .nav-link:hover { background: var(--surface-2); color: var(--text); } }
@@ -440,14 +457,13 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
 <header class="header">
   <div class="wrap">
     <div class="header-row">
+      <div class="theme-wrap">
+        <button class="theme-btn" type="button" id="theme-btn" data-action="toggleThemes" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu" aria-label="Choose color theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.9 1.8-1.9 0-.5-.2-.9-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10.5" cy="7" r="1.2"/><circle cx="15" cy="7.5" r="1.2"/></svg></button>
+        <div class="theme-menu" id="theme-menu" role="menu" aria-label="Color theme"></div>
+      </div>
       <button class="brand" type="button" data-action="go" data-route="home" aria-label="Project for RGIIS, go to Home">
-        <span class="brand-mark" aria-hidden="true">R</span>
         <span class="brand-name">Project for RGIIS</span>
       </button>
-      <div class="theme-wrap">
-        <button class="theme-btn" type="button" id="theme-btn" data-action="toggleThemes" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu" aria-label="Choose color theme"><span class="theme-dot" aria-hidden="true"></span></button>
-        <div class="theme-menu" id="theme-menu" role="menu" aria-label="Color theme" hidden></div>
-      </div>
       <nav class="nav-links" id="nav-desktop" aria-label="Main"></nav>
     </div>
   </div>
@@ -608,6 +624,8 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
   ];
   const TEST_TYPE_IDS = TEST_TYPES.map(t => t[0]);
   const testTypeName = id => (TEST_TYPES.find(t => t[0] === id) || TEST_TYPES[0])[1];
+  const NAME_RE = /^[\p{L}][\p{L}\p{M}'’ .-]{0,39}$/u;
+  const cleanName = v => typeof v === 'string' ? v.replace(/\s+/g, ' ').trim().slice(0, 40) : '';
   const defaultTestConfig = () => ({ count: 20, type: 'combined', timer: 'off', minutes: 10, seconds: 30, feedback: 'end' });
   const asObj = o => (o && typeof o === 'object' && !Array.isArray(o)) ? o : {};
   function sanitizeTestConfig(c) {
@@ -617,8 +635,13 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
       timer: ['off', 'total', 'per'].includes(c.timer) ? c.timer : d.timer, minutes: int(c.minutes, 1, 180, d.minutes),
       seconds: int(c.seconds, 5, 600, d.seconds), feedback: 'end' };
   }
-  const PALETTES = [['purple', 'Purple', '#4F46E5'], ['white', 'White', '#18181B'], ['burgundy', 'Burgundy', '#7A1E2C'], ['sakura', 'Sakura', '#C93A6E'], ['ocean', 'Ocean', '#0B6BCB'], ['forest', 'Forest', '#2F6B45'], ['sand', 'Sand', '#9A6A2F'], ['midnight', 'Midnight', '#8A90FF']];
-  const defaultState = () => ({ version: SCHEMA, words: {}, review: {}, days: {}, totals: { correct: 0, wrong: 0, sessions: 0 }, settings: { dailyGoal: 10, palette: 'purple', testConfig: defaultTestConfig() }, sessions: {}, test: null, testHistory: [] });
+  const PALETTES = [
+    ['purple', 'Purple', '#4F46E5', 'light'], ['white', 'White', '#18181B', 'light'], ['burgundy', 'Burgundy', '#7A1E2C', 'light'], ['sakura', 'Sakura', '#C93A6E', 'light'],
+    ['ocean', 'Ocean', '#0B6BCB', 'light'], ['forest', 'Forest', '#2F6B45', 'light'], ['sand', 'Sand', '#9A6A2F', 'light'],
+    ['midnight', 'Midnight', '#8A90FF', 'dark'], ['graphite', 'Graphite', '#3F3F46', 'dark'], ['emerald-night', 'Emerald Night', '#34D399', 'dark'], ['ruby-night', 'Ruby Night', '#F0506E', 'dark'],
+    ['deep-ocean', 'Deep Ocean', '#38BDF8', 'dark'], ['amethyst', 'Amethyst', '#C084FC', 'dark'], ['amber-night', 'Amber Night', '#FBBF24', 'dark']
+  ];
+  const defaultState = () => ({ version: SCHEMA, words: {}, review: {}, days: {}, totals: { correct: 0, wrong: 0, sessions: 0 }, settings: { dailyGoal: 10, palette: 'purple', testName: { first: '', last: '' }, testConfig: defaultTestConfig() }, sessions: {}, test: null, testHistory: [] });
   const nn = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0) ? v : 0;
   const GOALS = [0, 5, 10, 15, 20, 30];
 
@@ -644,11 +667,12 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
     const goal = Number(obj(raw.settings).dailyGoal);
     s.settings.dailyGoal = GOALS.includes(goal) ? goal : 10;
     s.settings.testConfig = sanitizeTestConfig(obj(raw.settings).testConfig);
+    const tn = obj(obj(raw.settings).testName); s.settings.testName = { first: cleanName(tn.first), last: cleanName(tn.last) };
     const pal = obj(raw.settings).palette; s.settings.palette = PALETTES.some(x => x[0] === pal) ? pal : 'purple';
     s.test = sanitizeTest(raw.test);
     s.testHistory = (Array.isArray(raw.testHistory) ? raw.testHistory : []).filter(e => e && typeof e === 'object').slice(0, 20).map(e => ({
       at: nn(e.at), count: Math.min(TOTAL, nn(e.count)), type: TEST_TYPE_IDS.includes(e.type) ? e.type : 'combined', percent: Math.min(100, nn(e.percent)),
-      points: Math.min(3, nn(e.points)), timeMs: nn(e.timeMs), timer: String(e.timer || '').slice(0, 40), leaves: nn(e.leaves), reason: String(e.reason || 'done').slice(0, 10) }));
+      points: Math.min(3, nn(e.points)), student: String(e.student || '').slice(0, 81), timeMs: nn(e.timeMs), timer: String(e.timer || '').slice(0, 40), leaves: nn(e.leaves), reason: String(e.reason || 'done').slice(0, 10) }));
     Object.entries(obj(raw.sessions)).forEach(([mode, sess]) => {
       const clean = sanitizeSession(mode, sess); if (clean) s.sessions[mode] = clean;
     });
@@ -682,7 +706,8 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
       }
     });
     const sel = t.sel;
-    return { config: sanitizeTestConfig(t.config), tasks, index: clampInt(nn(t.index), 0, tasks.length - 1), answers, startedAt: nn(t.startedAt) || Date.now(),
+    const st = asObj(t.student);
+    return { student: { first: cleanName(st.first), last: cleanName(st.last) }, config: sanitizeTestConfig(t.config), tasks, index: clampInt(nn(t.index), 0, tasks.length - 1), answers, startedAt: nn(t.startedAt) || Date.now(),
       deadline: t.deadline ? nn(t.deadline) : null, qDeadline: t.qDeadline ? nn(t.qDeadline) : null, leaves: nn(t.leaves),
       sel: (typeof sel === 'boolean' || isValidId(sel)) ? sel : null, draft: typeof t.draft === 'string' ? t.draft.slice(0, 120) : '' };
   }
@@ -930,6 +955,7 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
     book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
     star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>',
     test: '<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 3.5v2h6v-2"/><path d="m9 13 2 2 4-4.5"/>',
     menu: '<path d="M4 7h16M4 12h16M4 17h16"/>', arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
     alert: '<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>'
@@ -961,15 +987,18 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
   function applyPalette() {
     const p = state.settings.palette, root = document.documentElement;
     if (p && p !== 'purple') root.setAttribute('data-palette', p); else root.removeAttribute('data-palette');
-    const menu = document.getElementById('theme-menu');
-    if (menu) menu.innerHTML = PALETTES.map(([id, label, color]) => '<button type="button" class="theme-opt" role="menuitemradio" aria-checked="' + (state.settings.palette === id) + '" data-action="setPalette" data-palette="' + id + '"><span class="swatch lg" style="background:' + color + '"></span>' + label + (state.settings.palette === id ? icon('check', 'check') : '') + '</button>').join('');
+    const menu = document.getElementById('theme-menu'); if (!menu) return;
+    const opt = ([id, label, color, kind]) => '<button type="button" class="theme-opt" role="menuitemradio" tabindex="-1" aria-checked="' + (p === id) + '" data-action="setPalette" data-palette="' + id + '"><span class="swatch" style="background:' + (kind === 'dark' ? 'linear-gradient(135deg,#15151b 50%,' + color + ' 50%)' : color) + '"></span>' + label + (p === id ? icon('check', 'check') : '') + '</button>';
+    menu.innerHTML = '<div class="theme-group" role="presentation">Light</div>' + PALETTES.filter(x => x[3] === 'light').map(opt).join('') +
+      '<div class="theme-group" role="presentation">Dark</div>' + PALETTES.filter(x => x[3] === 'dark').map(opt).join('');
   }
   function setThemeMenu(open) {
     ui.themeOpen = open;
     const menu = document.getElementById('theme-menu'), btn = document.getElementById('theme-btn');
     if (!menu || !btn) return;
-    menu.hidden = !open; btn.setAttribute('aria-expanded', String(open));
-    if (open) { const cur = menu.querySelector('[aria-checked="true"]') || menu.querySelector('button'); if (cur) cur.focus({ preventScroll: true }); }
+    menu.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open));
+    menu.querySelectorAll('.theme-opt').forEach(o => o.tabIndex = open ? 0 : -1);
+    if (open) { const cur = menu.querySelector('[aria-checked="true"]') || menu.querySelector('.theme-opt'); if (cur) { cur.focus({ preventScroll: true }); cur.scrollIntoView({ block: 'nearest' }); } }
   }
   function renderFooter() {
     document.getElementById('footer').innerHTML = Storage.available
@@ -1307,10 +1336,11 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
     return ids.map((id, i) => makeTask(kinds[i], id));
   }
   function timerDesc(c) { return c.timer === 'total' ? c.minutes + ' min for the test' : c.timer === 'per' ? c.seconds + ' s per task' : 'No time limit'; }
-  function startTest(cfg, ids) {
+  const studentName = st => st && (st.first || st.last) ? (st.first + ' ' + st.last).trim() : '';
+  function startTest(cfg, ids, student) {
     const now = Date.now();
     const pool = shuffle(ids && ids.length ? ids : ALL_IDS).slice(0, cfg.count);
-    state.test = { config: cfg, tasks: buildTasks(pool, cfg.type), index: 0, answers: {}, startedAt: now,
+    state.test = { student: student || { first: '', last: '' }, config: cfg, tasks: buildTasks(pool, cfg.type), index: 0, answers: {}, startedAt: now,
       deadline: cfg.timer === 'total' ? now + cfg.minutes * 60e3 : null, qDeadline: cfg.timer === 'per' ? now + cfg.seconds * 1e3 : null,
       leaves: 0, sel: null, draft: '' };
     ui.testResult = null; ui.shield = false; ui.tsel = { en: null, ru: null }; ui.tflash = null; ui.testError = '';
@@ -1369,10 +1399,10 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
     const results = T.tasks.map((t, i) => ({ t, a: T.answers[i] || { value: null, score: 0, unanswered: true, timedOut: reason === 'time' } }));
     const ratio = n ? results.reduce((acc, r) => acc + r.a.score, 0) / n : 0;
     const entry = { at: now, count: n, type: T.config.type, percent: Math.round(ratio * 100), points: Math.round(ratio * 30) / 10,
-      timeMs: Math.max(0, Math.min(now, T.deadline || now) - T.startedAt), timer: timerDesc(T.config), leaves: T.leaves, reason };
+      timeMs: Math.max(0, Math.min(now, T.deadline || now) - T.startedAt), student: studentName(T.student), timer: timerDesc(T.config), leaves: T.leaves, reason };
     state.testHistory.unshift(entry); state.testHistory = state.testHistory.slice(0, 20);
     state.totals.sessions++;
-    ui.testResult = { entry, results, config: T.config };
+    ui.testResult = { entry, results, config: T.config, student: T.student };
     state.test = null; ui.shield = false; renderShield(); save();
     render(true); window.scrollTo(0, 0); focusKeep('page-title');
     announce('Test finished. Score ' + entry.percent + ' percent, ' + entry.points + ' of 3 points.');
@@ -1420,9 +1450,13 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
       radio('t-feedback', 'each', c.feedback === 'each', 'After each task', 'Practice style: check every answer right away.');
     const hist = state.testHistory.slice(0, 8);
     const histRows = hist.map(e => { const g = gradeLabel(e.points), d = new Date(e.at);
-      return '<tr><td class="num">' + esc(d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })) + '</td><td>' + esc(testTypeName(e.type)) + '</td><td class="num">' + e.count + '</td><td class="num"><strong>' + e.percent + '%</strong></td><td class="num">' + e.points + ' / 3</td><td><span class="chip ' + g[1] + '">' + g[0] + '</span></td><td class="num">' + fmtTime(e.timeMs) + '</td></tr>'; }).join('');
+      return '<tr><td class="num">' + esc(d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })) + '</td><td>' + (e.student ? esc(e.student) : '<span class="muted">–</span>') + '</td><td>' + esc(testTypeName(e.type)) + '</td><td class="num">' + e.count + '</td><td class="num"><strong>' + e.percent + '%</strong></td><td class="num">' + e.points + ' / 3</td><td><span class="chip ' + g[1] + '">' + g[0] + '</span></td><td class="num">' + fmtTime(e.timeMs) + '</td></tr>'; }).join('');
     return pageHead('Test', 'Check yourself under exam conditions. Scored in percent and on a 0–3 point scale.') +
       '<form class="panel panel-pad" id="test-setup" novalidate style="display:grid;gap:24px">' +
+        '<fieldset class="name-fields"><legend>Your name</legend><div class="name-row">' +
+          '<div class="field"><label for="t-first">First name</label><input class="input" id="t-first" type="text" autocomplete="given-name" autocapitalize="words" spellcheck="false" maxlength="40" placeholder="e.g. Anna" value="' + esc(state.settings.testName.first) + '"></div>' +
+          '<div class="field"><label for="t-last">Last name</label><input class="input" id="t-last" type="text" autocomplete="family-name" autocapitalize="words" spellcheck="false" maxlength="40" placeholder="e.g. Ivanova" value="' + esc(state.settings.testName.last) + '"></div>' +
+        '</div><p class="small muted">Shown during the test and saved with your result.</p></fieldset>' +
         '<div class="field"><label for="t-count">Number of tasks <span style="font-weight:400">(1–' + TOTAL + ')</span></label>' +
           '<div class="count-row"><input type="range" id="t-count-range" min="1" max="' + TOTAL + '" step="1" value="' + c.count + '" aria-label="Number of tasks slider"><input class="input input-sm num" type="number" id="t-count" min="1" max="' + TOTAL + '" step="1" inputmode="numeric" value="' + c.count + '"></div>' +
           '<div class="filters">' + [5, 10, 20, 30, TOTAL].map(n => '<button type="button" class="filter" data-action="testCount" data-n="' + n + '">' + (n === TOTAL ? 'All ' + n : n) + '</button>').join('') + '</div></div>' +
@@ -1432,7 +1466,7 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
         '<p class="error" id="test-error" role="alert"></p>' +
         '<div class="btn-row"><button type="submit" class="btn btn-primary btn-lg">Start test ' + icon('arrow') + '</button></div></form>' +
       '<section class="section" aria-labelledby="hist-h"><div class="section-head"><h2 id="hist-h">Recent results</h2></div><div class="panel' + (hist.length ? ' table-wrap' : '') + '">' +
-        (hist.length ? '<table><caption class="sr-only">Recent test results</caption><thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Tasks</th><th scope="col">Score</th><th scope="col">Points</th><th scope="col">Grade</th><th scope="col">Time</th></tr></thead><tbody>' + histRows + '</tbody></table>'
+        (hist.length ? '<table><caption class="sr-only">Recent test results</caption><thead><tr><th scope="col">Date</th><th scope="col">Name</th><th scope="col">Type</th><th scope="col">Tasks</th><th scope="col">Score</th><th scope="col">Points</th><th scope="col">Grade</th><th scope="col">Time</th></tr></thead><tbody>' + histRows + '</tbody></table>'
           : emptyState('test', 'No tests yet', 'Your scores will be listed here after your first test.')) + '</div></section>';
   }
 
@@ -1484,7 +1518,8 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
     const hasSel = t.kind === 'tf' || t.kind.indexOf('mc') === 0 ? sel !== null : t.kind === 'match' ? Object.keys(t.pairs).length > 0 : true;
     const label = a ? (last ? 'See results' : 'Next task') : each ? (hasSel ? 'Check' : 'Skip') : (hasSel ? (last ? 'Finish test' : 'Next') : 'Skip');
     const ts = testTimerState(T);
-    return '<div class="stage" style="max-width:' + (t.kind === 'match' ? 820 : 680) + 'px"><div class="stage-top"><div class="test-top"><span class="left"><span class="small muted">Task <strong class="num" style="color:var(--text)">' + (i + 1) + '</strong> / ' + n + '</span><span class="chip chip-accent">' + TASK_LABEL[t.kind] + '</span></span>' +
+    const sn = studentName(T.student);
+    return '<div class="stage" style="max-width:' + (t.kind === 'match' ? 820 : 680) + 'px"><div class="stage-top">' + (sn ? '<p class="student">' + icon('user') + '<span>' + esc(sn) + '</span></p>' : '') + '<div class="test-top"><span class="left"><span class="small muted">Task <strong class="num" style="color:var(--text)">' + (i + 1) + '</strong> / ' + n + '</span><span class="chip chip-accent">' + TASK_LABEL[t.kind] + '</span></span>' +
       '<span class="left"><span class="timer' + (ts.warn ? ' warn' : '') + '" id="test-timer" role="timer" aria-label="' + ts.label + '">' + icon('clock') + '<b>' + ts.txt + '</b></span><button type="button" class="btn btn-ghost btn-sm" data-action="testFinish">Finish</button></span></div>' +
       progressBar(Object.keys(T.answers).length, n, 'Tasks answered') + '</div>' +
       '<h1 class="sr-only" id="page-title" tabindex="-1">Test, task ' + (i + 1) + ' of ' + n + '</h1>' +
@@ -1522,7 +1557,7 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
     const hasMistakes = r.results.some(x => x.a.score < 1);
     const title = e.reason === 'time' ? 'Time is up' : 'Test complete';
     return '<div class="stage" style="max-width:860px"><div class="panel done"><div class="done-badge">' + icon(e.reason === 'time' ? 'clock' : 'check') + '</div>' +
-      '<div style="display:grid;gap:6px"><h2 id="page-title" tabindex="-1">' + title + '</h2><p class="muted">' + esc(testTypeName(e.type)) + ' · ' + plural(e.count, 'task') + ' · ' + esc(e.timer) + '</p></div>' +
+      '<div style="display:grid;gap:6px"><h2 id="page-title" tabindex="-1">' + title + '</h2>' + (e.student ? '<p style="font-weight:600;font-size:16px">' + esc(e.student) + '</p>' : '') + '<p class="muted">' + esc(testTypeName(e.type)) + ' · ' + plural(e.count, 'task') + ' · ' + esc(e.timer) + '</p></div>' +
       '<div class="score-row"><div class="score"><b>' + e.percent + '%</b><span>Score</span></div><div class="score"><b>' + e.points + ' <small>/ 3</small></b><span>Points</span></div></div>' +
       '<span class="chip ' + g[1] + '" style="height:26px;font-size:13px;padding:0 12px">' + g[0] + '</span>' +
       '<div class="done-stats num">' + box(c.correct, 'Correct') + box(c.partial, 'Partly correct') + box(c.wrong, 'Wrong') + box(c.unanswered, 'Unanswered') + box(fmtTime(e.timeMs), 'Time') + box(e.leaves, 'Left the test') + '</div>' +
@@ -1676,8 +1711,8 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
       if (ui.tsel.en !== null && ui.tsel.ru !== null) { unpair('en', ui.tsel.en); unpair('ru', ui.tsel.ru); t.pairs[ui.tsel.en] = ui.tsel.ru; ui.tsel = { en: null, ru: null }; announce('Paired.'); }
       save(); render(); restoreTileFocus(el.dataset);
     },
-    testRestart: () => { const r = ui.testResult; if (r) startTest(r.config); },
-    testRetryMistakes: () => { const r = ui.testResult; if (!r) return; const ids = Array.from(new Set(r.results.filter(x => x.a.score < 1).map(x => x.t.id))); if (ids.length) startTest(Object.assign({}, r.config, { count: ids.length }), ids); },
+    testRestart: () => { const r = ui.testResult; if (r) startTest(r.config, null, r.student); },
+    testRetryMistakes: () => { const r = ui.testResult; if (!r) return; const ids = Array.from(new Set(r.results.filter(x => x.a.score < 1).map(x => x.t.id))); if (ids.length) startTest(Object.assign({}, r.config, { count: ids.length }), ids, r.student); },
     testSetup: () => { ui.testResult = null; render(true); window.scrollTo(0, 0); focusKeep('page-title'); }
   });
   function restoreTileFocus(d) {
@@ -1734,6 +1769,12 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
       const num = id => { const el = document.getElementById(id); const v = el ? el.value.trim() : ''; return /^\d+$/.test(v) ? Number(v) : NaN; };
       const pick = name => (form.querySelector('input[name="' + name + '"]:checked') || {}).value;
       const fail = (msg, focusId) => { const er = document.getElementById('test-error'); if (er) er.textContent = msg; const f = document.getElementById(focusId); if (f) f.focus(); };
+      const first = cleanName(document.getElementById('t-first').value), last = cleanName(document.getElementById('t-last').value);
+      if (!first) return fail('Enter your first name to start the test.', 't-first');
+      if (!NAME_RE.test(first)) return fail('First name can contain only letters, spaces, hyphens and apostrophes.', 't-first');
+      if (!last) return fail('Enter your last name to start the test.', 't-last');
+      if (!NAME_RE.test(last)) return fail('Last name can contain only letters, spaces, hyphens and apostrophes.', 't-last');
+      state.settings.testName = { first, last };
       const count = num('t-count'), timer = pick('t-timer') || 'off';
       if (!(count >= 1 && count <= TOTAL)) return fail('Number of tasks must be a whole number from 1 to ' + TOTAL + '.', 't-count');
       const prev = state.settings.testConfig;
@@ -1742,7 +1783,7 @@ footer { padding-block: 0 40px; color: var(--faint); font-size: 12.5px; }
       if (timer === 'per') { seconds = num('t-seconds'); if (!(seconds >= 5 && seconds <= 600)) return fail('Set the time per task from 5 to 600 seconds.', 't-seconds'); }
       const cfg = sanitizeTestConfig({ count, type: pick('t-type'), timer, minutes, seconds, feedback: pick('t-feedback') });
       state.settings.testConfig = cfg; save();
-      startTest(cfg);
+      startTest(cfg, null, { first, last });
     } else if (form.id === 'setup-form') {
       const mode = form.dataset.mode;
       const src = (form.querySelector('input[name="source"]:checked') || {}).value || 'all';
